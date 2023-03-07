@@ -24,7 +24,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_07_122348) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "event_id"
-    t.string "name"
     t.index ["event_id"], name: "index_bars_on_event_id"
   end
 
