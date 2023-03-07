@@ -1,10 +1,13 @@
 class EventUsersController < ApplicationController
   def index
-    @eventusers = EventUser.all
+    @event = Event.find(params[:event_id])
+    @eventusers = @event.event_users
 
     @markers = @eventusers.geocoded.map do |eventuser|
-      {lat: eventuser.latitude,
-      lng: eventuser.longitude
+      {
+        lat: eventuser.latitude,
+        lng: eventuser.longitude,
+        user_name: eventuser.user.email
       }
     end
   end
