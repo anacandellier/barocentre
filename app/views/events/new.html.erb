@@ -4,9 +4,8 @@
 
     <%= simple_form_for(@event) do |f| %>
     <%= f.input :name, label: "Nom de l'événement" %>
-    <%= f.input :date, label: "Date" %>
-    <%= f.input :time, label: "Heure de rendez-vous" %>
-    <%= f.submit %>
+    <%= f.input :date, label: "Date", html5: true %>
+    <%= f.submit%>
     <% end %>
   </div>
 </div>
