@@ -1,0 +1,11 @@
+<div class="container vh-100">
+  <div class="mt-5">
+    <h1>Nouvel événement</h1>
+
+    <%= simple_form_for(@event) do |f| %>
+    <%= f.input :name, label: "Nom de l'événement" %>
+    <%= f.input :date, label: "Date", html5: true %>
+    <%= f.submit%>
+    <% end %>
+  </div>
+</div>
