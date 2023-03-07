@@ -1,2 +1,13 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="container hauteur flex-column square-box d-flex justify-content-center align-items-center">
+  <img src="https://1gdbrgc6ckfeq.cdn.shift8web.com/wp-content/uploads/2021/01/logo.png" width=150px>
+  <br><br>
+  <div class="d-flex">
+    <% if user_signed_in?%>
+      <div class="m-1"><%= link_to "TRINQUONS!", "new_event_path", class: "button2" %></div>
+      <div class="m-1"><%= link_to "Mes Events", "dashboard_path", class: "button2" %></div>
+    <% else %>
+      <div class ="m-1"><%= link_to "Inscription", new_user_registration_path, class: "button2" %></div>
+      <div class="m-1"><%= link_to "Connection", new_user_session_path, class: "button2" %></div>
+    <% end %>
+  </div>
+</div>
