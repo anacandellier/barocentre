@@ -10,7 +10,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema[7.0].define(version: 2023_03_07_143834) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,8 +17,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_07_143834) do
   create_table "bars", force: :cascade do |t|
     t.float "distance"
     t.integer "nb_votes"
-    t.float "bar_lat"
-    t.float "bar_lng"
+    t.float "latitude"
+    t.float "longitude"
     t.datetime "opening_hours"
     t.string "address"
     t.datetime "created_at", null: false
@@ -31,8 +30,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_07_143834) do
 
   create_table "event_users", force: :cascade do |t|
     t.string "user_address"
-    t.string "user_lat"
-    t.string "user_lng"
+    t.float "latitude"
+    t.float "longitude"
     t.bigint "mean_of_transport_id", null: false
     t.bigint "event_id", null: false
     t.bigint "user_id", null: false
@@ -71,8 +70,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_07_143834) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "username"
-    t.float "lat"
-    t.float "lng"
+    t.float "latitude"
+    t.float "longitude"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
