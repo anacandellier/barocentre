@@ -5,6 +5,7 @@
     <%= simple_form_for(@event) do |f| %>
     <%= f.input :name, label: "Nom de l'événement" %>
     <%= f.input :date, label: "Date", html5: true %>
+    <%= f.input :event_status, input_html: { value: "0" }, as: :hidden %>
     <%= f.submit%>
     <% end %>
   </div>

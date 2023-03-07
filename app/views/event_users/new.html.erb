@@ -1,0 +1,13 @@
+<div class="container vh-100">
+  <div class="mt-5">
+    <h1>Je participe à cet événement</h1>
+    <h2><%= @event.name %></h2>
+    <p><%= @event.date %></p>
+
+    <%= simple_form_for([@event, @event_user]) do |f| %>
+    <%= f.input :user_address, label: "Je pars de..." %>
+    <%= f.association :mean_of_transport, label: "en" %>
+    <%= f.submit%>
+    <% end %>
+  </div>
+</div>
