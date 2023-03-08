@@ -10,28 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_07_143834) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_06_161732) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "bars", force: :cascade do |t|
     t.float "distance"
     t.integer "nb_votes"
-    t.float "latitude"
-    t.float "longitude"
+    t.float "bar_lat"
+    t.float "bar_lng"
     t.datetime "opening_hours"
     t.string "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "event_id"
-    t.string "name"
     t.index ["event_id"], name: "index_bars_on_event_id"
   end
 
   create_table "event_users", force: :cascade do |t|
     t.string "user_address"
-    t.string "latitude"
-    t.string "longitude"
+    t.string "user_lat"
+    t.string "user_lng"
     t.bigint "mean_of_transport_id", null: false
     t.bigint "event_id", null: false
     t.bigint "user_id", null: false
@@ -43,6 +42,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_07_143834) do
   end
 
   create_table "events", force: :cascade do |t|
+    t.datetime "time"
     t.string "name"
     t.float "barycenter_lng"
     t.float "barycenter_lat"
@@ -50,7 +50,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_07_143834) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
-    t.datetime "date", precision: nil
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 
@@ -70,8 +69,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_07_143834) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "username"
-    t.float "latitude"
-    t.float "longitude"
+    t.float "lat"
+    t.float "lng"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
