@@ -6,5 +6,4 @@ Rails.application.routes.draw do
   resources :events, only: [:new, :create, :show] do # route du new, show, create event
     resources :event_users, only: [:new, :create, :index]
   end
-
 end

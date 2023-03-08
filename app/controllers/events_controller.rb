@@ -8,7 +8,7 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     @event.user = current_user
     if @event.save
-      redirect_to invite_path(@event)
+      redirect_to event_path(@event)
     else
       render :new, status: :unprocessable_entity
     end
@@ -18,9 +18,15 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
   end
 
+
   def show
     @event = Event.find(params[:id])
   end
+
+  def share
+    @event = Event.find(params[:id])
+  end
+
 
   private
 
