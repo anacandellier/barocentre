@@ -8,8 +8,7 @@ class EventUsersController < ApplicationController
         lat: eventuser.latitude,
         lng: eventuser.longitude,
         user_name: eventuser.user.email,
-        info_window_html: render_to_string(partial: "info_window", locals: {event_user: eventuser} ),
-        marker_html: render_to_string(partial: "marker")
+        info_window_html: render_to_string(partial: "info_window", locals: {event_user: eventuser})
       }
     end
   end
