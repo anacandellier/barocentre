@@ -18,6 +18,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
   end
 
+
   def show
     @event = Event.find(params[:id])
   end
@@ -25,6 +26,7 @@ class EventsController < ApplicationController
   def share
     @event = Event.find(params[:id])
   end
+
 
   private
 

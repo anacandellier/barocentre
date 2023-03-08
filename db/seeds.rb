@@ -4,9 +4,11 @@ Event.destroy_all
 MeanOfTransport.destroy_all
 User.destroy_all
 
-User.create!(email: "alice@test.com", password: "alice@test.com", password_confirmation: "alice@test.com", username:"Alice")
-User.create!(email: "bob@test.com", password: "bob@test.com", password_confirmation: "bob@test.com", username:"Bob")
-User.create!(email: "paul@test.com", password: "paul@test.com", password_confirmation: "paul@test.com", username:"Paul")
+
+User.create!(email: "alice@test.com", password: "alice@test.com", password_confirmation: "alice@test.com", username: "Alice")
+User.create!(email: "bob@test.com", password: "bob@test.com", password_confirmation: "bob@test.com", username: "Bob")
+User.create!(email: "paul@test.com", password: "paul@test.com", password_confirmation: "paul@test.com", username: "Paul")
+
 
 MeanOfTransport.create!(name: "Vélo", speed: 20)
 MeanOfTransport.create!(name: "Marche et transports", speed: 30)

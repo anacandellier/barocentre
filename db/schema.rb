@@ -45,14 +45,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_08_112624) do
   create_table "bars", force: :cascade do |t|
     t.float "distance"
     t.integer "nb_votes"
-    t.float "latitude"
-    t.float "longitude"
+    t.float "bar_lat"
+    t.float "bar_lng"
     t.datetime "opening_hours"
     t.string "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "event_id"
-    t.string "name"
     t.index ["event_id"], name: "index_bars_on_event_id"
   end
 
@@ -71,6 +70,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_08_112624) do
   end
 
   create_table "events", force: :cascade do |t|
+    t.datetime "time"
     t.string "name"
     t.float "barycenter_lng"
     t.float "barycenter_lat"
@@ -78,7 +78,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_08_112624) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
-    t.datetime "date", precision: nil
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 
@@ -98,8 +97,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_08_112624) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "username"
-    t.float "latitude"
-    t.float "longitude"
+    t.float "lat"
+    t.float "lng"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
