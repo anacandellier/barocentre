@@ -12,9 +12,10 @@ MeanOfTransport.create(name: "Velo", speed: 20)
 
 Event.create!(user: User.first, name: "anniv", time: DateTime.now)
 
-EventUser.create(
+EventUser.create!(
   user_address: "13 rue des dames paris",
   mean_of_transport: MeanOfTransport.first,
   event: Event.last,
   user: User.first
 )
+
