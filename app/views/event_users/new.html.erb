@@ -5,8 +5,8 @@
     <p><%= @event.date %></p>
 
     <%= simple_form_for([@event, @event_user]) do |f| %>
-    <%= f.input :user_address, label: "Je pars de..." %>
-    <%= f.association :mean_of_transport, label: "en" %>
+    <%= f.input :user_address, label: "Je pars de...", input_html: {data: {address_autocomplete_target: "address"}}, wrapper_html: {data: {controller: "address-autocomplete", address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]}}, placeholder: "68 avenue Parmentier"%>
+    <%= f.association :mean_of_transport, label: "en", as: :radio_buttons %>
     <%= f.submit%>
     <% end %>
   </div>

@@ -1,21 +1,65 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
 
-User.create(email: "bob@test.com", password: "bobtest", password_confirmation: "bobtest")
+EventUser.destroy_all
+Event.destroy_all
+MeanOfTransport.destroy_all
+User.destroy_all
 
-MeanOfTransport.create(name: "Velo", speed: 20)
+User.create!(email: "alice@test.com", password: "alice@test.com", password_confirmation: "alice@test.com")
+User.create!(email: "bob@test.com", password: "bob@test.com", password_confirmation: "bob@test.com")
+User.create!(email: "paul@test.com", password: "paul@test.com", password_confirmation: "paul@test.com")
 
-Event.create!(user: User.first, name: "anniv", time: DateTime.now)
+MeanOfTransport.create!(name: "Vélo", speed: 20)
+MeanOfTransport.create!(name: "Marche et transports", speed: 30)
+MeanOfTransport.create!(name: "Voiture", speed: 25)
 
+
+Event.create!(user: User.find_by(email: "alice@test.com"), name: "Anniv d'Alice", date: DateTime.new(2023,4,3.5))
+Event.create!(user: User.find_by(email: "bob@test.com"), name: "Pot de départ de Bob", date: DateTime.new(2023,5,10.8))
+
+
+#Alice qui vient à l'Anniv d'Alice
 EventUser.create!(
-  user_address: "13 rue des dames paris",
-  mean_of_transport: MeanOfTransport.first,
-  event: Event.last,
-  user: User.first
+  user_address: "13 rue carducci paris",
+  mean_of_transport: MeanOfTransport.find_by(name: "Vélo"),
+  event: Event.find_by(name: "Anniv d'Alice"),
+  user: User.find_by(email: "alice@test.com")
+)
+#Bob qui vient à l'Anniv d'Alice
+EventUser.create!(
+  user_address: "7 rue Nicolas Roret Paris",
+  mean_of_transport: MeanOfTransport.find_by(name: "Voiture"),
+  event: Event.find_by(name: "Anniv d'Alice"),
+  user: User.find_by(email: "bob@test.com")
+)
+
+#Paul qui vient à l'Anniv d'Alice
+EventUser.create!(
+  user_address: "3 impasse Piver Paris",
+  mean_of_transport: MeanOfTransport.find_by(name: "Marche et transports"),
+  event: Event.find_by(name: "Anniv d'Alice"),
+  user: User.find_by(email: "paul@test.com")
+)
+
+#Alice qui vient au Pot de départ de Bob
+EventUser.create!(
+  user_address: "1 rue de Navarre Paris",
+  mean_of_transport: MeanOfTransport.find_by(name: "Vélo"),
+  event: Event.find_by(name: "Pot de départ de Bob"),
+  user: User.find_by(email: "alice@test.com")
+)
+#Bob qui vient au pot de départ de Bob
+EventUser.create!(
+  user_address: "23 rue Clovis",
+  mean_of_transport: MeanOfTransport.find_by(name: "Voiture"),
+  event: Event.find_by(name: "Pot de départ de Bob"),
+  user: User.find_by(email: "bob@test.com")
+)
+
+#Paul qui vient au pot de départ de Bob
+EventUser.create!(
+  user_address: "76 boulevard Richard Lenoir Paris",
+  mean_of_transport: MeanOfTransport.find_by(name: "Marche et transports"),
+  event: Event.find_by(name: "Pot de départ de Bob"),
+  user: User.find_by(email: "paul@test.com")
 )
 
