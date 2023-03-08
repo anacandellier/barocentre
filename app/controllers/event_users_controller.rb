@@ -25,7 +25,7 @@ class EventUsersController < ApplicationController
     @event_user.user = current_user
     @event_user.event = @event
     if @event_user.save
-      redirect_to root_path
+      redirect_to event_event_users_path(@event)
     else
       render :new, status: :unprocessable_entity
     end

@@ -1,0 +1,21 @@
+
+<h1>Bienvenue sur ton nouvel évènement : <%= @event.name %> </h1>
+
+<br>
+<br>
+<br>
+
+
+<h1>Partage ce lien et trouvons le bar</h1>
+
+<br>
+<br>
+<br>
+
+<div class ="m-1">
+  <%= link_to "Lien vers page d'invitation en attendant le native sharing", invite_path(@event), class: "button2" %>
+</div>
+
+<div class ="m-1">
+  <%= link_to "Continuer", new_event_event_user_path(@event), class: "button2" %>
+</div>
