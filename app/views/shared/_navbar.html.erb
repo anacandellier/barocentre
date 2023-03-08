@@ -12,7 +12,11 @@
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
           <li class="nav-item border-bottom p-2">
+          <% if current_user.photo.attached? %>
+            <%= cl_image_tag current_user.photo.key, :width=>42, :height=>42, :radius=>"max", :crop=>"fill" %>
+          <% else %>
             <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+          <% end %>
             <%= current_user.email%>
           </li>
           <li class="nav-item p-2">
