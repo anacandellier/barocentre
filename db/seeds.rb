@@ -4,6 +4,7 @@ Event.destroy_all
 MeanOfTransport.destroy_all
 User.destroy_all
 
+
 User.create!(email: "alice@test.com", password: "alice@test.com", password_confirmation: "alice@test.com", username: "Alice")
 User.create!(email: "bob@test.com", password: "bob@test.com", password_confirmation: "bob@test.com", username: "Bob")
 User.create!(email: "paul@test.com", password: "paul@test.com", password_confirmation: "paul@test.com", username: "Paul")
@@ -62,4 +63,3 @@ EventUser.create!(
   event: Event.find_by(name: "Pot de départ de Bob"),
   user: User.find_by(email: "paul@test.com")
 )
-
