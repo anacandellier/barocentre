@@ -58,8 +58,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_08_112624) do
 
   create_table "event_users", force: :cascade do |t|
     t.string "user_address"
-    t.string "latitude"
-    t.string "longitude"
+    t.float "latitude"
+    t.float "longitude"
     t.bigint "mean_of_transport_id", null: false
     t.bigint "event_id", null: false
     t.bigint "user_id", null: false
