@@ -1,4 +1,6 @@
 class EventsController < ApplicationController
+  skip_before_action :authenticate_user!, only: [ :invite ]
+
 
   def new
     @event = Event.new

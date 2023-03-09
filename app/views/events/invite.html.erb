@@ -1,12 +1,26 @@
 <div class="container hauteur flex-column square-box d-flex justify-content-center align-items-center">
-  <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "rounded-circle" %>
+  <% if current_user.photo.attached? %>
+    <div class="waving-box">
+      <%= cl_image_tag current_user.photo.key, :width=>250, :height=>250, :radius=>"max", :crop=>"fill" %>
+      <i class="waving fs-1">👋</i>
+    </div>
+  <% else %>
+    <div class="waving-box">
+      <%= image_tag "https://as1.ftcdn.net/v2/jpg/03/53/11/00/1000_F_353110097_nbpmfn9iHlxef4EDIhXB1tdTD0lcWhG9.jpg", class: "rounded-circle", style: " width: 250px"%>
+      <i class="waving">👋</i>
+    </div>
+  <% end %>
   <br>
-  <h2><%= @event.user.email %> t'as invité à un événement</h2>
-  <h4 class="text-center lw"><%= @event.name.capitalize %> - <%= @event.date %></h4>
+  <br>
+  <h2 class=>tu as reçu une invitation de</h2>
+  <h2><strong><%= @event.user.email %></strong></h2>
+  <br>
+  <h3 class="text-center lw"> Rejoins le groupe "<%= @event.name.capitalize %>"</h3>
+  <h6>À la date de : <%= @event.date %></h6>
   <br>
   <div class="d-flex">
     <% if user_signed_in?%>
-      <div class="m-1"><%= link_to "Se localiser", new_event_event_user_path(@event.event_users), class: "button2" %></div>
+      <div class="m-1"><%= link_to "Se localiser", new_event_event_user_path(@event), class: "button2" %></div>
     <% else %>
       <div class ="m-1"><%= link_to "Inscription", new_user_registration_path, class: "button2" %></div>
       <div class="m-1"><%= link_to "Connexion", new_user_session_path, class: "button2" %></div>
