@@ -62,7 +62,7 @@ class EventUsersController < ApplicationController
       if duration != 0
         eventuser.update(speed: distance / duration.to_f)
       else
-        eventuser.update(speed: 0)
+        eventuser.update(speed: 1)
       end
     end
   end
@@ -76,9 +76,9 @@ class EventUsersController < ApplicationController
     sum_speed = 0
     @eventusers.each do |eventuser|
       sum_speed += eventuser.speed
-      sum_lat += eventuser.latitude * eventuser.speed
+      sum_lat += eventuser.latitude.to_f * eventuser.speed
 
-      sum_lng += eventuser.longitude * eventuser.speed
+      sum_lng += eventuser.longitude.to_f * eventuser.speed
 
     end
     if sum_speed != 0

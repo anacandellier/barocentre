@@ -38,14 +38,14 @@ EventUser.create!(
 #Alice qui vient au Pot de départ de Bob
 EventUser.create!(
   user_address: "1 rue de Navarre Paris",
-  transport: "transit",
+  transport: "driving",
   event: Event.find_by(name: "Pot de départ de Bob"),
   user: User.find_by(email: "alice@test.com")
 )
 #Bob qui vient au pot de départ de Bob
 EventUser.create!(
   user_address: "23 rue Clovis",
-  transport: "transit",
+  transport: "bicycling",
   event: Event.find_by(name: "Pot de départ de Bob"),
   user: User.find_by(email: "bob@test.com")
 )
@@ -53,7 +53,7 @@ EventUser.create!(
 #Paul qui vient au pot de départ de Bob
 EventUser.create!(
   user_address: "76 boulevard Richard Lenoir Paris",
-  transport: "transit",
+  transport: "bicycling",
   event: Event.find_by(name: "Pot de départ de Bob"),
   user: User.find_by(email: "paul@test.com")
 )
