@@ -59,8 +59,12 @@ class EventUsersController < ApplicationController
       duration = result["routes"][0]["legs"][0]["duration"]["value"]
       eventuser.update(distance: distance)
       eventuser.update(duration: duration)
-      eventuser.update(speed: distance / duration.to_f) unless duration.zero?
+      if duration != 0
+        eventuser.update(speed: distance / duration.to_f)
+      else
+        eventuser.update(speed: 0)
       end
+    end
   end
 
   def second_barycenter
@@ -77,8 +81,10 @@ class EventUsersController < ApplicationController
       sum_lng += eventuser.longitude * eventuser.speed
 
     end
-    sec_bary_lat = sum_lat / sum_speed.to_f
-    sec_bary_lng = sum_lng / sum_speed.to_f
+    if sum_speed != 0
+      sec_bary_lat = sum_lat / sum_speed.to_f
+      sec_bary_lng = sum_lng / sum_speed.to_f
+    end
     @event.update(barycenter_lat: sec_bary_lat)
     @event.update(barycenter_lng: sec_bary_lng)
   end
