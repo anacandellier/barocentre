@@ -1,4 +1,5 @@
 module ApplicationHelper
+
   def path_to_event(event)
     my_participation = event.event_users.find_by(user: current_user)
     if my_participation.nil?
