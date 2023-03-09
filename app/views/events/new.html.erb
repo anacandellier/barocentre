@@ -1,12 +1,28 @@
-<div class="container vh-100">
-  <div class="mt-5">
-    <h1>Nouvel événement</h1>
+<div class="container hauteur flex-column square-box d-flex justify-content-center align-items-center">
+    <% if current_user.photo.attached? %>
+      <%= cl_image_tag current_user.photo.key, :width=>250, :height=>250, :radius=>"max", :crop=>"fill" %>
+    <% else %>
+      <%= image_tag "https://as1.ftcdn.net/v2/jpg/03/53/11/00/1000_F_353110097_nbpmfn9iHlxef4EDIhXB1tdTD0lcWhG9.jpg", class: "rounded-circle", style: " width: 250px"%>
+    <% end %>
+    <br><br>
 
     <%= simple_form_for(@event) do |f| %>
-    <%= f.input :name, label: "Nom de l'événement" %>
-    <%= f.input :date, label: "Date", html5: true %>
-    <%= f.input :event_status, input_html: { value: "0" }, as: :hidden %>
-    <%= f.submit%>
+      <div class="form-inputs">
+        <%= f.input :name,
+                    label: false,
+                    placeholder: "Nom de l'événement" %>
+        <%= f.input :date,
+                    label: false,
+                    html5: true %>
+        <%= f.input :event_status,
+                    input_html: { value: "0" },
+                    as: :hidden %>
+      </div>
+      <br>
+
+      <div class="form-actions">
+        <%= f.button :submit, "Je crée mon événement", class: "button2" %>
+        <%= link_to "back", root_path, class: "button2" %>
+      </div>
     <% end %>
-  </div>
 </div>
