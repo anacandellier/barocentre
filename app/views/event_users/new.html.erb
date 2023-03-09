@@ -9,7 +9,7 @@
                   label: "Je pars de...",
                   placeholder: "68 avenue Parmentier",
                   input_html: {
-                    class: 'd-none',
+                    # class: 'd-none',
                     data: {
                       address_autocomplete_target: "address"
                     }
@@ -20,15 +20,15 @@
                       address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]
                     }
                   } %>
-      <%= f.association :mean_of_transport, label: "en", as: :radio_buttons %>
-      <%= f.submit%>
+      <%= f.input :transport, label: "en", as: :radio_buttons, collection: [['Voiture','driving'], ['Transports en commun', 'transit'], ['Vélo', 'bicycling']] %>
+      <%= f.submit "Je participe !"%>
     <% end %>
   </div>
 
 <div style="width: 100%; height: 600px;"
   data-controller="map"
   data-map-markers-value="<%= @markers.to_json %>"
-  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"> 
+  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
 </div>
 
 </div>
