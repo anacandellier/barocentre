@@ -5,7 +5,18 @@ module ApplicationHelper
     if my_participation.nil?
       return new_event_event_user_path(event)
     else
-      return event_path(event)
+      dashboard_to_event(event)
     end
   end
+
+  def dashboard_to_event(event)
+    if event.created?
+      return event_path(event)
+    elsif event.open?
+      return event_event_users_path(event)
+    elsif event.vote?
+      return event_bars_path(event)
+    end
+  end
+
 end

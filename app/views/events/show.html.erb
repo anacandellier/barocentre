@@ -9,18 +9,23 @@
     <br>
     <h1> Ton event' "<%= @event.name %>" à démarré </h1>
     <br>
-    <p>voici ton lien :</p>
+    <p> Partage ton lien pour inviter tes copains :</p>
     <div class ="m-1">
 
     <%= link_to "Lien vers page d'invitation en attendant le native sharing", invite_path(@event), class: "button2" %>
     </div>
     <br><br><br>
-    <div class ="m-1">
-    <%= link_to "Continuer", new_event_event_user_path(@event), class: "button2" %>
+    <% unless current_user && current_user.participates_to_event?(@event) %>
+      <div class ="m-1">
+        <%= link_to "Continuer", new_event_event_user_path(@event), class: "button2" %>
+      </div>
+    <% else %>
+      <div class ="m-1">
+        <%= link_to "Continuer", event_event_users_path(@event), class: "button2" %>
+      </div>
+    <% end %>
     <%= link_to "back", root_path, class: "button2" %>
     </div>
-
-
   </div>
 
 <% else %>

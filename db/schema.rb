@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_09_103630) do
+<<<<<<< HEAD
+ActiveRecord::Schema[7.0].define(version: 2023_03_09_143200) do
+=======
+ActiveRecord::Schema[7.0].define(version: 2023_03_09_154716) do
+>>>>>>> master
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -53,14 +57,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_09_103630) do
     t.datetime "updated_at", null: false
     t.bigint "event_id"
     t.string "name"
+    t.float "rating"
+    t.integer "placeid"
+    t.string "photo"
     t.index ["event_id"], name: "index_bars_on_event_id"
   end
 
   create_table "event_users", force: :cascade do |t|
     t.string "user_address"
-    t.string "latitude"
-    t.string "longitude"
-    t.bigint "mean_of_transport_id", null: false
+    t.float "latitude"
+    t.float "longitude"
     t.bigint "event_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
@@ -68,8 +74,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_09_103630) do
     t.float "speed"
     t.float "duration"
     t.float "distance"
+    t.string "transport"
     t.index ["event_id"], name: "index_event_users_on_event_id"
-    t.index ["mean_of_transport_id"], name: "index_event_users_on_mean_of_transport_id"
     t.index ["user_id"], name: "index_event_users_on_user_id"
   end
 
@@ -83,13 +89,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_09_103630) do
     t.datetime "date", precision: nil
     t.integer "status", default: 0
     t.index ["user_id"], name: "index_events_on_user_id"
-  end
-
-  create_table "mean_of_transports", force: :cascade do |t|
-    t.string "name"
-    t.float "speed"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -119,7 +118,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_09_103630) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "event_users", "events"
-  add_foreign_key "event_users", "mean_of_transports"
   add_foreign_key "event_users", "users"
   add_foreign_key "events", "users"
   add_foreign_key "votes", "bars"
