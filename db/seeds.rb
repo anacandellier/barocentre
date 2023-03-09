@@ -1,4 +1,5 @@
 
+
 EventUser.destroy_all
 Event.destroy_all
 User.destroy_all
@@ -10,7 +11,6 @@ User.create!(email: "paul@test.com", password: "paul@test.com", password_confirm
 
 Event.create!(user: User.find_by(email: "alice@test.com"), name: "Anniv d'Alice", date: DateTime.new(2023,4,3.5))
 Event.create!(user: User.find_by(email: "bob@test.com"), name: "Pot de départ de Bob", date: DateTime.new(2023,5,10.8))
-
 
 #Alice qui vient à l'Anniv d'Alice
 EventUser.create!(
