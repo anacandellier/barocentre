@@ -1,27 +1,35 @@
+<% if current_user == @event.user %>
+  <div class="container hauteur flex-column square-box d-flex justify-content-center align-items-center">
+    <% if current_user.photo.attached? %>
+      <%= cl_image_tag current_user.photo.key, :width=>250, :height=>250, :radius=>"max", :crop=>"fill" %>
+    <% else %>
+      <%= image_tag "https://as1.ftcdn.net/v2/jpg/03/53/11/00/1000_F_353110097_nbpmfn9iHlxef4EDIhXB1tdTD0lcWhG9.jpg", class: "rounded-circle", style: " width: 250px"%>
+    <% end %>
+    <br>
+    <br>
+    <h1> Ton event' "<%= @event.name %>" à démarré </h1>
+    <br>
+    <p> Partage ton lien pour inviter tes copains :</p>
+    <div class ="m-1">
 
-<h1>Bienvenue sur ton nouvel évènement : <%= @event.name %> </h1>
-
-<br>
-<br>
-<br>
-
-
-<h1>Partage ce lien et trouvons le bar</h1>
-
-<br>
-<br>
-<br>
-
-<div class ="m-1">
-  <%= link_to "Lien vers page d'invitation en attendant le native sharing", invite_path(@event), class: "button2" %>
-</div>
-
-<% unless current_user && current_user.participates_to_event?(@event) %>
-  <div class ="m-1">
-    <%= link_to "Continuer", new_event_event_user_path(@event), class: "button2" %>
+    <%= link_to "Lien vers page d'invitation en attendant le native sharing", invite_path(@event), class: "button2" %>
+    </div>
+    <br><br><br>
+    <% unless current_user && current_user.participates_to_event?(@event) %>
+      <div class ="m-1">
+        <%= link_to "Continuer", new_event_event_user_path(@event), class: "button2" %>
+      </div>
+    <% else %>
+      <div class ="m-1">
+        <%= link_to "Continuer", event_event_users_path(@event), class: "button2" %>
+      </div>
+    <% end %>
+    <%= link_to "back", root_path, class: "button2" %>
+    </div>
   </div>
+
 <% else %>
- <div class ="m-1">
-    <%= link_to "Continuer", event_event_users_path(@event), class: "button2" %>
+  <div class="container hauteur flex-column square-box d-flex justify-content-center align-items-center">
+    <h1>ACCESS DENY</h1>
   </div>
 <% end %>
