@@ -1,15 +1,17 @@
-<div class="container hauteur flex-column square-box d-flex justify-content-center align-items-center">
-  <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "rounded-circle" %>
-  <br>
-  <h2><%= @event.user.email %> t'as invité à un événement</h2>
-  <h4 class="text-center lw"><%= @event.name.capitalize %> - <%= @event.date %></h4>
-  <br>
-  <div class="d-flex">
-    <% if user_signed_in?%>
-      <div class="m-1"><%= link_to "Se localiser", new_event_event_user_path(@event.event_users), class: "button2" %></div>
-    <% else %>
-      <div class ="m-1"><%= link_to "Inscription", new_user_registration_path, class: "button2" %></div>
-      <div class="m-1"><%= link_to "Connexion", new_user_session_path, class: "button2" %></div>
-    <% end %>
+<div class="container" style="width: 500px">
+  <div class="d-flex flex-column justify-content-center align-items-center p-5">
+    <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "rounded-circle" %>
+    <br>
+    <h3 class="text-center border-bottom"><%= @event.user.email %> t'as invité à un événement</h3>
+    <h5 class="text-center lw"><%= @event.name.capitalize %> - <%= @event.date %></h5>
+    <br>
+    <div class="d-flex">
+      <% if user_signed_in?%>
+        <div class="m-1"><%= link_to "Se localiser", new_event_event_user_path(@event.event_users), class: "btn btn-ghost" %></div>
+      <% else %>
+        <div class ="m-1"><%= link_to "Inscription", new_user_registration_path, class: "btn btn-ghost" %></div>
+        <div class="m-1"><%= link_to "Connexion", new_user_session_path, class: "btn btn-ghost" %></div>
+      <% end %>
+    </div>
   </div>
 </div>

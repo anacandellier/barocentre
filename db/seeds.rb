@@ -1,4 +1,5 @@
 
+
 EventUser.destroy_all
 Event.destroy_all
 MeanOfTransport.destroy_all
@@ -15,7 +16,6 @@ MeanOfTransport.create!(name: "Voiture", speed: 25)
 
 Event.create!(user: User.find_by(email: "alice@test.com"), name: "Anniv d'Alice", date: DateTime.new(2023,4,3.5))
 Event.create!(user: User.find_by(email: "bob@test.com"), name: "Pot de départ de Bob", date: DateTime.new(2023,5,10.8))
-
 
 #Alice qui vient à l'Anniv d'Alice
 EventUser.create!(
@@ -62,4 +62,3 @@ EventUser.create!(
   event: Event.find_by(name: "Pot de départ de Bob"),
   user: User.find_by(email: "paul@test.com")
 )
-
