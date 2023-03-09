@@ -9,4 +9,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  def participates_to_event?(event)
+    EventUser.where(event: event, user: self).any?
+  end
 end

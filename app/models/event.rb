@@ -4,9 +4,10 @@ class Event < ApplicationRecord
   validates :name, presence: true
   validates :date, presence: true
   enum status: {
-    open: 0,
-    vote: 1,
-    closed: 2
+    created: 0,
+    open: 1,
+    vote: 2,
+    closed: 3
   }
   scope :ongoing, -> { where(status: [:open, :vote]) }
   scope :past, -> { where('date < :today', today: DateTime.now) }
@@ -16,4 +17,6 @@ class Event < ApplicationRecord
     .where("events.user_id = ? OR event_users.user_id = ?", user.id, user.id)
     .distinct
   }
+
+
 end

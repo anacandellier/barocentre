@@ -28,11 +28,12 @@ class EventUsersController < ApplicationController
     @event_user = EventUser.new(event_user_params)
     @event_user.user = current_user
     @event_user.event = @event
-    if @event_user.save
+    if @event_user.save!
       redirect_to event_event_users_path(@event)
     else
       render :new, status: :unprocessable_entity
     end
+    @event.open!
   end
 
   def first_barycenter
@@ -52,21 +53,18 @@ class EventUsersController < ApplicationController
     bary_lng = first_barycenter.last
     @distance = []
     @eventusers.each do |eventuser|
-      if eventuser.mean_of_transport == "Vélo"
-        mode = "bicycling"
-      elsif eventuser.mean_of_transport == "Voiture"
-        mode = "driving"
-      elsif eventuser.mean_of_transport == "Marche et transports"
-        mode = "transit"
-      end
-      url = "https://maps.googleapis.com/maps/api/directions/json?origin=#{eventuser.latitude},#{eventuser.longitude}&destination=#{bary_lat},#{bary_lng}&mode=#{mode}&arrival_time=#{@event.date.to_i}&key=#{ENV['GOOGLE_API_KEY']}"
+      url = "https://maps.googleapis.com/maps/api/directions/json?origin=#{eventuser.latitude},#{eventuser.longitude}&destination=#{bary_lat},#{bary_lng}&mode=#{eventuser.transport}&arrival_time=#{@event.date.to_i}&key=#{ENV['GOOGLE_API_KEY']}"
       result = JSON.parse(URI.open(url).read)
       distance = result["routes"][0]["legs"][0]["distance"]["value"]
       duration = result["routes"][0]["legs"][0]["duration"]["value"]
       eventuser.update(distance: distance)
       eventuser.update(duration: duration)
-      eventuser.update(speed: distance / duration.to_f)
+      if duration != 0
+        eventuser.update(speed: distance / duration.to_f)
+      else
+        eventuser.update(speed: 1)
       end
+    end
   end
 
   def second_barycenter
@@ -83,8 +81,10 @@ class EventUsersController < ApplicationController
       sum_lng += eventuser.longitude * eventuser.speed
 
     end
-    sec_bary_lat = sum_lat / sum_speed.to_f
-    sec_bary_lng = sum_lng / sum_speed.to_f
+    if sum_speed != 0
+      sec_bary_lat = sum_lat / sum_speed.to_f
+      sec_bary_lng = sum_lng / sum_speed.to_f
+    end
     @event.update(barycenter_lat: sec_bary_lat)
     @event.update(barycenter_lng: sec_bary_lng)
   end
@@ -93,7 +93,7 @@ class EventUsersController < ApplicationController
   private
 
   def event_user_params
-    params.require(:event_user).permit(:user_address, :mean_of_transport_id, :distance)
+    params.require(:event_user).permit(:user_address, :transport)
   end
 
 end
