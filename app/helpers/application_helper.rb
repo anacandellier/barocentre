@@ -1,12 +1,11 @@
 module ApplicationHelper
 
-  def avatar_for(user)
-    @avatar = user.avatar
-    if @avatar.empty?
-        @avatar_user = image_tag("https://pbs.twimg.com/media/C8QqGm3VYAEKUWC.jpg", alt: user.name)
+  def path_to_event(event)
+    my_participation = event.event_users.find_by(user: current_user)
+    if my_participation.nil?
+      return new_event_event_user_path(event)
     else
-        @avatar_user = image_tag(@avatar.url, alt: user.name)
+      return event_path(event)
     end
-    return @avatar_user
   end
 end

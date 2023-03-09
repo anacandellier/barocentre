@@ -8,7 +8,8 @@ class EventUsersController < ApplicationController
         lat: eventuser.latitude,
         lng: eventuser.longitude,
         user_name: eventuser.user.email,
-        info_window_html: render_to_string(partial: "info_window", locals: {event_user: eventuser})
+        info_window_html: render_to_string(partial: "info_window", locals: {event_user: eventuser} ),
+        marker_html: render_to_string(partial: "marker")
       }
     end
   end
@@ -24,7 +25,7 @@ class EventUsersController < ApplicationController
     @event_user.user = current_user
     @event_user.event = @event
     if @event_user.save
-      redirect_to root_path
+      redirect_to event_event_users_path(@event)
     else
       render :new, status: :unprocessable_entity
     end
