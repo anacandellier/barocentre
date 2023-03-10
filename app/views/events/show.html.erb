@@ -1,7 +1,7 @@
 <% if current_user == @event.user %>
   <div class="container hauteur flex-column square-box d-flex justify-content-center align-items-center">
     <% if current_user.photo.attached? %>
-      <%= cl_image_tag current_user.photo.key, :width=>250, :height=>250, :radius=>"max", :crop=>"fill" %>
+      <%= cl_image_tag current_user.photo.key, :width=>250, :height=>250, :radius=>"max", :crop=>"fill", class: "rounded-circle" %>
     <% else %>
       <%= image_tag "https://as1.ftcdn.net/v2/jpg/03/53/11/00/1000_F_353110097_nbpmfn9iHlxef4EDIhXB1tdTD0lcWhG9.jpg", class: "rounded-circle", style: " width: 250px"%>
     <% end %>
@@ -12,7 +12,7 @@
     <br>
     <p> Partage ton lien pour inviter tes copains :</p>
     <div class ="m-1">
-        <h5><%= root_url %><%= invite_path(@event)%></h5>
+        <p><%= root_url %><%= invite_path(@event)%></p>
     </div>
     <br><br>
     <% unless current_user && current_user.participates_to_event?(@event) %>
