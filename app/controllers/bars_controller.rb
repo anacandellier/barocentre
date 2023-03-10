@@ -3,6 +3,7 @@ require "net/http"
 
 class BarsController < ApplicationController
   def index
+
     @event = Event.find(params[:event_id])
     get_bars_from_google(@event)
     @bars = Bar.where(event_id: params[:event_id])
@@ -10,6 +11,8 @@ class BarsController < ApplicationController
        {
          lat: bar.latitude,
          lng: bar.longitude,
+         info_window_html: render_to_string(partial: "info_window", locals: {bar: bar}),
+          marker_html: render_to_string(partial: "marker", locals: {bar: bar})
        }
      end
   end
@@ -45,7 +48,7 @@ class BarsController < ApplicationController
   def get_bars_from_google(event)
     # renvoie une réponse de google avec des bars à proximité du baeycentre
     # filtre ces bars selon ton call cad + 4.5 & open quand ça se passe
-    url = URI("https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword=bar&type=bar&location=#{event.barycenter_lat},#{event.barycenter_lng}&radius=1500&key=#{ENV['GOOGLE_API_KEY']}")
+    url = URI("https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword=bar&type=bar&location=#{event.barycenter_lat},#{event.barycenter_lng}&radius=500&key=#{ENV['GOOGLE_API_KEY']}")
 
     https = Net::HTTP.new(url.host, url.port)
     https.use_ssl = true

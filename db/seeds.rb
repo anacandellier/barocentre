@@ -4,56 +4,85 @@ EventUser.destroy_all
 Event.destroy_all
 User.destroy_all
 
-User.create!(email: "alice@test.com", password: "alice@test.com", password_confirmation: "alice@test.com", username: "Alice")
-User.create!(email: "bob@test.com", password: "bob@test.com", password_confirmation: "bob@test.com", username: "Bob")
-User.create!(email: "paul@test.com", password: "paul@test.com", password_confirmation: "paul@test.com", username: "Paul")
+laura = User.new(email: "laura@barocentre.com", password: "123456", password_confirmation: "123456", username: "Laura")
+hugo = User.new(email: "hugo@barocentre.com", password: "123456", password_confirmation: "123456", username: "Hugo")
+paul = User.new(email: "paul@barocentre.com", password: "123456", password_confirmation: "123456", username: "Paul")
+noemie = User.new(email: "noemie@barocentre.com", password: "123456", password_confirmation: "123456", username: "Noémie")
 
+laura.photo.attach(
+  io: File.open('public/images/laura.png'),
+  filename: 'laura.png', # use the extension of the attached file here
+  content_type: 'image/png' # ideally use the mime type of the attached file here, like 'image/jpg''
+)
+laura.save!
 
-Event.create!(user: User.find_by(email: "alice@test.com"), name: "Anniv d'Alice", date: DateTime.new(2023,4,3.5))
-Event.create!(user: User.find_by(email: "bob@test.com"), name: "Pot de départ de Bob", date: DateTime.new(2023,5,10.8))
+hugo.photo.attach(
+  io: File.open('public/images/hugo.png'),
+  filename: 'hugo.png', # use the extension of the attached file here
+  content_type: 'image/png' # ideally use the mime type of the attached file here, like 'image/jpg''
+)
+hugo.save!
 
-#Alice qui vient à l'Anniv d'Alice
+paul.photo.attach(
+  io: File.open('public/images/paul.png'),
+  filename: 'paul.png', # use the extension of the attached file here
+  content_type: 'image/png' # ideally use the mime type of the attached file here, like 'image/jpg''
+)
+paul.save!
+
+noemie.photo.attach(
+  io: File.open('public/images/noemie.png'),
+  filename: 'noemie.png', # use the extension of the attached file here
+  content_type: 'image/png' # ideally use the mime type of the attached file here, like 'image/jpg''
+)
+noemie.save!
+
+anniv = Event.create!(user: User.find_by(email: "laura@barocentre.com"), name: "Anniv de Laura", date: DateTime.new(2023,4,3.6))
+after = Event.create!(user: User.find_by(email: "hugo@barocentre.com"), name: "Afterwork du Wagon", date: DateTime.new(2023,3,10.7))
+
+anniv.open!
+after.open!
+
 EventUser.create!(
-  user_address: "13 rue carducci paris",
+  user_address: "64 rue des Dames, 75017 Paris",
   transport: "driving",
-  event: Event.find_by(name: "Anniv d'Alice"),
-  user: User.find_by(email: "alice@test.com")
+  event: Event.find_by(name: "Anniv de Laura"),
+  user: laura
 )
-#Bob qui vient à l'Anniv d'Alice
+
 EventUser.create!(
-  user_address: "7 rue Nicolas Roret Paris",
+  user_address: "13 rue Carducci, 75019 Paris",
   transport: "bicycling",
-  event: Event.find_by(name: "Anniv d'Alice"),
-  user: User.find_by(email: "bob@test.com")
+  event: Event.find_by(name: "Anniv de Laura"),
+  user: noemie
 )
 
-#Paul qui vient à l'Anniv d'Alice
+
 EventUser.create!(
-  user_address: "3 impasse Piver Paris",
+  user_address: "7 rue Nicolas Roret, 75013 Paris",
   transport: "transit",
-  event: Event.find_by(name: "Anniv d'Alice"),
-  user: User.find_by(email: "paul@test.com")
+  event: Event.find_by(name: "Anniv de Laura"),
+  user: hugo
 )
 
-#Alice qui vient au Pot de départ de Bob
 EventUser.create!(
   user_address: "1 rue de Navarre Paris",
   transport: "driving",
-  event: Event.find_by(name: "Pot de départ de Bob"),
-  user: User.find_by(email: "alice@test.com")
+  event: Event.find_by(name: "Afterwork du Wagon"),
+  user: hugo
 )
-#Bob qui vient au pot de départ de Bob
+
 EventUser.create!(
   user_address: "23 rue Clovis",
   transport: "bicycling",
-  event: Event.find_by(name: "Pot de départ de Bob"),
-  user: User.find_by(email: "bob@test.com")
+  event: Event.find_by(name: "Afterwork du Wagon"),
+  user: paul
 )
 
-#Paul qui vient au pot de départ de Bob
+
 EventUser.create!(
   user_address: "76 boulevard Richard Lenoir Paris",
   transport: "bicycling",
-  event: Event.find_by(name: "Pot de départ de Bob"),
-  user: User.find_by(email: "paul@test.com")
+  event: Event.find_by(name: "Afterwork du Wagon"),
+  user: laura
 )

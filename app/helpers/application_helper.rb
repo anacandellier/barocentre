@@ -11,12 +11,11 @@ module ApplicationHelper
 
   def dashboard_to_event(event)
     if event.created?
-      return event_path(event)
+      return event_event_users_path(event)
     elsif event.open?
       return event_event_users_path(event)
     elsif event.vote?
-      return event_bars_path(event)
+      return bars_path(event)
     end
   end
-
 end

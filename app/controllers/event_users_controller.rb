@@ -15,7 +15,6 @@ class EventUsersController < ApplicationController
         marker_html: render_to_string(partial: "marker")
       }
     end
-    second_barycenter
   end
 
   def new
@@ -34,6 +33,32 @@ class EventUsersController < ApplicationController
       render :new, status: :unprocessable_entity
     end
     @event.open!
+  end
+
+  def barocentre
+    @event = Event.find(params[:event_id])
+    @eventusers = @event.event_users
+    second_barycenter
+    @markers = @eventusers.geocoded.map do |eventuser|
+      {
+        lat: eventuser.latitude,
+        lng: eventuser.longitude,
+        user_name: eventuser.user.email,
+        info_window_html: render_to_string(partial: "info_window", locals: {event_user: eventuser} ),
+        marker_html: render_to_string(partial: "marker")
+      }
+    end
+    @barycenter_marker =[{
+      lat: @event.barycenter_lat,
+      lng: @event.barycenter_lng,
+      marker_html: render_to_string(partial: "marker"),
+      }]
+  end
+
+  private
+
+  def event_user_params
+    params.require(:event_user).permit(:user_address, :transport)
   end
 
   def first_barycenter
@@ -89,12 +114,4 @@ class EventUsersController < ApplicationController
     @event.update(barycenter_lng: sec_bary_lng)
     @event.bars.destroy_all
   end
-
-
-  private
-
-  def event_user_params
-    params.require(:event_user).permit(:user_address, :transport)
-  end
-
 end
