@@ -67,3 +67,9 @@
    60% { transform: rotate( 0.0deg) }  /* Reset for the last half to pause */
   100% { transform: rotate( 0.0deg) }
 }
+
+.dash-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}

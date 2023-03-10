@@ -37,7 +37,6 @@ class EventUsersController < ApplicationController
 
 
 
-
   private
 
   def event_user_params

@@ -12,8 +12,14 @@
                   <div class="col-sm-3 col-lg-4 border-bottom mb-2">
                     <div class="d-flex flex-row justify-content-start align-items-center m-3">
                       <div>
-                        <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "rounded-circle me-3", style: "width: 100px" %>
+                        <% if element.user.photo.attached? %>
+                          <%= image_tag element.user.photo, class: "dash-avatar me-3" %>
+                        <% else %>
+                          <%= image_tag "https://as1.ftcdn.net/v2/jpg/03/53/11/00/1000_F_353110097_nbpmfn9iHlxef4EDIhXB1tdTD0lcWhG9.jpg", class: "rounded-circle me-3", style: "width: 100px" %>
+                        <% end %>
                       </div>
+
+
                       <div>
                         <p class="mt-3" style="font-size: 13px"><strong><%= element.user.username %></strong><br><%= element.user_address %></p>
                         <p class="mt-3" style="font-size: 13px"><%= translate(element.transport) %></p>
