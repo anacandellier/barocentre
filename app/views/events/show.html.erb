@@ -7,12 +7,12 @@
     <% end %>
     <br>
     <br>
-    <h1> Ton event' "<%= @event.name %>" à démarré </h1>
+    <h1 class="align-items-center"> "<%= @event.name %>" à démarré </h1>
     <br>
     <br>
     <p> Partage ton lien pour inviter tes copains :</p>
     <div class ="m-1">
-        <h3><%= root_url %><%= invite_path(@event)%></h3>
+        <h5><%= root_url %><%= invite_path(@event)%></h5>
     </div>
     <br><br>
     <% unless current_user && current_user.participates_to_event?(@event) %>
@@ -29,7 +29,7 @@
     </div>
   </div>
 
-  
+
 
 <% else %>
   <div class="container hauteur flex-column square-box d-flex justify-content-center align-items-center">
