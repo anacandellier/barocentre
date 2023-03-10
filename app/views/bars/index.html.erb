@@ -17,7 +17,7 @@
                       <p><%= bar.address %></p>
                       <p><%= bar.rating %> <i class="fa-solid fa-star"></i></p>
                     </div>
-                    <%= link_to "vote", root_path, class: "btn btn-ghost btn-sm" %>
+                    <%= link_to "vote", event_votes_path(@event, bar: bar), data: { turbo_method: :post }, class: "btn btn-ghost btn-sm" %>
                   </div>
               </div>
             <% end %>

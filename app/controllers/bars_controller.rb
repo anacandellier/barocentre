@@ -4,7 +4,8 @@ require "net/http"
 class BarsController < ApplicationController
   def index
     @event = Event.find(params[:event_id])
-    @bars = get_bars_from_google(@event)
+    get_bars_from_google(@event)
+    @bars = Bar.where(event_id: params[:event_id])
      @markers = @bars.map do |bar|
        {
          lat: bar.latitude,
@@ -29,6 +30,12 @@ class BarsController < ApplicationController
     @bar = Bar.new
   end
 
+  def classment
+    @event =  Event.find(params[:event_id])
+    @event_users =  Event.find(params[:event_id]).event_users
+    @bars = Bar.where(event_id: params[:event_id]).sort { |a,b| b.votes.count <=> a.votes.count }
+  end
+
   private
 
   def bar_params
@@ -47,23 +54,22 @@ class BarsController < ApplicationController
 
     response = https.request(request)
     data = JSON.parse(response.read_body)
-    bar_list = []
     # pour chacun de ces bars, tu récupères la place id & tu t'en sers pour un second call si nécessaire
       # Extraire le nom, la note et l'adresse`
-    data["results"][0..5].each do |bar|
-      photo_url = URI("https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=#{bar["photos"][0]["photo_reference"]}&key=#{ENV['GOOGLE_API_KEY']}")
-      new_bar = Bar.create({
-        name: bar["name"],
-        rating: bar["rating"],
-        address: bar["vicinity"],
-        placeid: bar["place_id"],
-        photo: photo_url,
-        event_id: event.id,
-        latitude: bar["geometry"]["location"]["lat"],
-        longitude: bar["geometry"]["location"]["lng"]
-      })
-      bar_list << new_bar
+    unless event.bars.size >= 5
+      data["results"][0..4].each do |bar|
+        photo_url = URI("https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=#{bar["photos"][0]["photo_reference"]}&key=#{ENV['GOOGLE_API_KEY']}")
+        new_bar = Bar.create({
+          name: bar["name"],
+          rating: bar["rating"],
+          address: bar["vicinity"],
+          placeid: bar["place_id"],
+          photo: photo_url,
+          event_id: event.id,
+          latitude: bar["geometry"]["location"]["lat"],
+          longitude: bar["geometry"]["location"]["lng"]
+        })
+      end
     end
-    return bar_list
   end
 end

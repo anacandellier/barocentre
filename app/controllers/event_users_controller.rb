@@ -87,6 +87,7 @@ class EventUsersController < ApplicationController
     end
     @event.update(barycenter_lat: sec_bary_lat)
     @event.update(barycenter_lng: sec_bary_lng)
+    @event.bars.destroy_all
   end
 
 
