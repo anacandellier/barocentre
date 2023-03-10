@@ -53,7 +53,6 @@ class EventUsersController < ApplicationController
       lng: @event.barycenter_lng,
       marker_html: render_to_string(partial: "marker"),
       }]
-
   end
 
   private
