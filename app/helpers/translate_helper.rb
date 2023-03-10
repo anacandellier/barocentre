@@ -9,6 +9,12 @@ module TranslateHelper
       "Votes en cours"
     when "closed"
       "Bar O Centre !"
+    when "transit"
+      "Transports en commun"
+    when "driving"
+      "Voiture"
+    when "bicycling"
+      "Vélo"
     end
   end
 end

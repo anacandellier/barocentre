@@ -3,6 +3,7 @@ require "net/http"
 
 class BarsController < ApplicationController
   def index
+
     @event = Event.find(params[:event_id])
     @bars = get_bars_from_google(@event)
      @markers = @bars.map do |bar|
@@ -38,7 +39,7 @@ class BarsController < ApplicationController
   def get_bars_from_google(event)
     # renvoie une réponse de google avec des bars à proximité du baeycentre
     # filtre ces bars selon ton call cad + 4.5 & open quand ça se passe
-    url = URI("https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword=bar&type=bar&location=#{event.barycenter_lat},#{event.barycenter_lng}&radius=1500&key=AIzaSyDSooLIe1ubabNJ-sLiWwDaxN5JAHlkNn4")
+    url = URI("https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword=bar&type=bar&location=#{event.barycenter_lat},#{event.barycenter_lng}&radius=1500&key=#{ENV['GOOGLE_API_KEY']}")
 
     https = Net::HTTP.new(url.host, url.port)
     https.use_ssl = true
@@ -51,7 +52,7 @@ class BarsController < ApplicationController
     # pour chacun de ces bars, tu récupères la place id & tu t'en sers pour un second call si nécessaire
       # Extraire le nom, la note et l'adresse`
     data["results"][0..5].each do |bar|
-      photo_url = URI("https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=#{bar["photos"][0]["photo_reference"]}&key=AIzaSyDSooLIe1ubabNJ-sLiWwDaxN5JAHlkNn4")
+      photo_url = URI("https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=#{bar["photos"][0]["photo_reference"]}&key=#{ENV['GOOGLE_API_KEY']}")
       new_bar = Bar.create({
         name: bar["name"],
         rating: bar["rating"],
