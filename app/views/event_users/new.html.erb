@@ -2,7 +2,7 @@
   <div class="mt-5">
     <h1>Je participe à cet événement</h1>
     <h2><%= @event.name %></h2>
-    <p><%= @event.date %></p>
+    <p><%= @event.date.strftime("%A %-d %B %Y à %k:%M") %></p>
 
     <%= simple_form_for([@event, @event_user]) do |f| %>
       <%= f.input :user_address,
@@ -21,7 +21,7 @@
                     }
                   } %>
       <%= f.input :transport, label: "en", as: :radio_buttons, collection: [['Voiture','driving'], ['Transports en commun', 'transit'], ['Vélo', 'bicycling']] %>
-      <%= f.submit "Je participe !"%>
+      <%= f.submit "Je participe !", class: "btn btn-primary me-3 mb-3"%>
     <% end %>
   </div>
 
