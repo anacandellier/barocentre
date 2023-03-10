@@ -5,6 +5,7 @@ class BarsController < ApplicationController
   def index
 
     @event = Event.find(params[:event_id])
+    @event.vote!
     @bars = get_bars_from_google(@event)
      @markers = @bars.map do |bar|
        {
@@ -39,7 +40,7 @@ class BarsController < ApplicationController
   def get_bars_from_google(event)
     # renvoie une réponse de google avec des bars à proximité du baeycentre
     # filtre ces bars selon ton call cad + 4.5 & open quand ça se passe
-    url = URI("https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword=bar&type=bar&location=#{event.barycenter_lat},#{event.barycenter_lng}&radius=1500&key=#{ENV['GOOGLE_API_KEY']}")
+    url = URI("https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword=bar&type=bar&location=#{event.barycenter_lat},#{event.barycenter_lng}&radius=500&key=#{ENV['GOOGLE_API_KEY']}")
 
     https = Net::HTTP.new(url.host, url.port)
     https.use_ssl = true
