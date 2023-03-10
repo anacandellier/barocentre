@@ -3,6 +3,7 @@ require "net/http"
 
 class BarsController < ApplicationController
   def index
+
     @event = Event.find(params[:event_id])
     @bars = get_bars_from_google(@event)
      @markers = @bars.map do |bar|
