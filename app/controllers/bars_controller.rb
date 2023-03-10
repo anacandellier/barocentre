@@ -52,7 +52,7 @@ class BarsController < ApplicationController
       # Extraire le nom, la note et l'adresse`
     data["results"][0..5].each do |bar|
       photo_url = URI("https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=#{bar["photos"][0]["photo_reference"]}&key=AIzaSyDSooLIe1ubabNJ-sLiWwDaxN5JAHlkNn4")
-      new_bar = Bar.create ({
+      new_bar = Bar.create({
         name: bar["name"],
         rating: bar["rating"],
         address: bar["vicinity"],

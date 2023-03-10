@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema[7.0].define(version: 2023_03_09_143200) do
-=======
 ActiveRecord::Schema[7.0].define(version: 2023_03_09_154716) do
->>>>>>> master
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -65,8 +61,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_09_154716) do
 
   create_table "event_users", force: :cascade do |t|
     t.string "user_address"
-    t.float "latitude"
-    t.float "longitude"
+    t.string "latitude"
+    t.string "longitude"
     t.bigint "event_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
