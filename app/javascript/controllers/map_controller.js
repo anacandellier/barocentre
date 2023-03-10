@@ -4,7 +4,8 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
     static values = {
     apiKey: String,
-    markers: Array
+    markers: Array,
+    barmarker: Array,
   }
 
 
@@ -34,6 +35,14 @@ export default class extends Controller {
         .setPopup(popup)
         .addTo(this.map)
     })
+
+    this.barmarkerValue.forEach((marker) => {
+
+      new mapboxgl.Marker()
+        .setLngLat([ marker.lng, marker.lat ])
+        .addTo(this.map)
+    })
+
   }
     #fitMapToMarkers() {
       const bounds = new mapboxgl.LngLatBounds()
