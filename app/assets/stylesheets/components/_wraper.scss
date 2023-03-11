@@ -1,0 +1,10 @@
+.wraper {
+  height: 100vh;
+  background: #f1e1c5
+}
+
+@media (max-width: 375px) {
+  .wraper {
+    width: 100%;
+  }
+}
