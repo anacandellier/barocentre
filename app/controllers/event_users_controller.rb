@@ -112,6 +112,7 @@ class EventUsersController < ApplicationController
     end
     @event.update(barycenter_lat: sec_bary_lat)
     @event.update(barycenter_lng: sec_bary_lng)
+    # Appeler le calcul du barycentre uniquement à la fin (ou quand un nouvel invité arrive), et on supprime donc la liste des bars
     @event.bars.destroy_all
   end
 end
