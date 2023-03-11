@@ -1,6 +1,7 @@
 class Event < ApplicationRecord
   belongs_to :user
   has_many :event_users
+  has_many :bars
   validates :name, presence: true
   validates :date, presence: true
   enum status: {

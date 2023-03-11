@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   get "events/:event_id/bars", to: "bars#index", as: :bars
   get "events/:event_id/event_users/barocentre", to: "event_users#barocentre", as: :barocentre  # page de la map avec barocentre
   resources :events, only: [:new, :create, :show] do # route du new, show, create event
+    get "/classment", to: "bars#classment", as: :classment # page du classement
+    get "/itineraire", to: "bars#itineraire", as: :itineraire # page de l'itinéraire
+    resources :votes, only: [:create]
     resources :event_users, only: [:new, :create, :index] # route du new, create, index event_user
   end
 end
