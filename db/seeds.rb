@@ -8,6 +8,40 @@ laura = User.new(email: "laura@barocentre.com", password: "123456", password_con
 hugo = User.new(email: "hugo@barocentre.com", password: "123456", password_confirmation: "123456", username: "Hugo")
 paul = User.new(email: "paul@barocentre.com", password: "123456", password_confirmation: "123456", username: "Paul")
 noemie = User.new(email: "noemie@barocentre.com", password: "123456", password_confirmation: "123456", username: "Noémie")
+amelie = User.new(email: "amelie@barocentre.com", password: "123456", password_confirmation: "123456", username: "Amelie")
+louis = User.new(email: "louis@barocentre.com", password: "123456", password_confirmation: "123456", username: "Louis")
+thomas = User.new(email: "thomas@barocentre.com", password: "123456", password_confirmation: "123456", username: "Thomas")
+julie = User.new(email: "julie@barocentre.com", password: "123456", password_confirmation: "123456", username: "Julie")
+
+
+julie.photo.attach(
+  io: File.open('public/images/julie.png'),
+  filename: 'julie.png', # use the extension of the attached file here
+  content_type: 'image/png' # ideally use the mime type of the attached file here, like 'image/jpg''
+)
+julie.save!
+
+amelie.photo.attach(
+  io: File.open('public/images/amelie.png'),
+  filename: 'amelie.png', # use the extension of the attached file here
+  content_type: 'image/png' # ideally use the mime type of the attached file here, like 'image/jpg''
+)
+amelie.save!
+
+louis.photo.attach(
+  io: File.open('public/images/louis.png'),
+  filename: 'louis.png', # use the extension of the attached file here
+  content_type: 'image/png' # ideally use the mime type of the attached file here, like 'image/jpg''
+)
+louis.save!
+
+thomas.photo.attach(
+  io: File.open('public/images/thomas.png'),
+  filename: 'thomas.png', # use the extension of the attached file here
+  content_type: 'image/png' # ideally use the mime type of the attached file here, like 'image/jpg''
+)
+thomas.save!
+
 
 laura.photo.attach(
   io: File.open('public/images/laura.png'),

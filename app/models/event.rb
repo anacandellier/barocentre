@@ -4,12 +4,14 @@ class Event < ApplicationRecord
   has_many :bars, dependent: :destroy
   validates :name, presence: true
   validates :date, presence: true
+
   enum status: {
     created: 0,
     open: 1,
     vote: 2,
     closed: 3
   }
+
   scope :ongoing, -> { where(status: [:open, :vote]) }
   scope :past, -> { where('date < :today', today: DateTime.now) }
   scope :future, -> { where('date > :today', today: DateTime.now) }
@@ -19,5 +21,7 @@ class Event < ApplicationRecord
     .distinct
   }
 
-
+  def selected_bar
+    bars.find_by(selected: true)
+  end
 end

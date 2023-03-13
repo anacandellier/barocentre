@@ -11,10 +11,12 @@
     <br>
     <br>
     <div class ="m-1">
-          <div class="share-btn button2" data-controller="share"
+      <span class="share-btn button2" data-controller="share"
           data-action="click->share#share"
-          data-share-title-value=<%= @event.name %>
-          data-share-url-value=<%= new_event_event_user_url(@event) %>>Partager aux copains</div>
+          data-share-title-value="<%= @event.name %>"
+          data-share-url-value="<%= new_event_event_user_url(@event) %>">
+        Partager aux copains
+      </span>
     </div>
     <br><br>
     <% unless current_user && current_user.participates_to_event?(@event) %>
@@ -28,7 +30,6 @@
         <%= link_to "back", root_path, class: "button2" %>
       </div>
     <% end %>
-    </div>
   </div>
 
 

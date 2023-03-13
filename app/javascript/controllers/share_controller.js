@@ -19,6 +19,7 @@ export default class extends Controller {
       text: `Hello, inscris toi à l'event : ${this.titleValue} en donnant ton adresse et ton moyen de transport pour qu'on trouve un bar qui arrange tout le monde`,
       url: this.urlValue
     }
+    console.log(sharingObj)
     if (navigator.share) {
       // stocker dans des static 'values' (depuis l'HTML l'url de l'évenement)
       // récupérer dans le JS et interpoller en tant que 'URL &
