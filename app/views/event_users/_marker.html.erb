@@ -1,1 +1,5 @@
-<%= image_tag "logo.png", height: 30, width: 30, alt: "Logo" %>
+<% if current_user.photo.attached? %>
+  <%= cl_image_tag current_user.photo.key, :width=>30, :height=>30, :radius=>"max", :crop=>"fill", class: "rounded-circle" %>
+<% else %>
+  <%= image_tag "https://as1.ftcdn.net/v2/jpg/03/53/11/00/1000_F_353110097_nbpmfn9iHlxef4EDIhXB1tdTD0lcWhG9.jpg", class: "rounded-circle", style: " width: 30px"%>
+<% end %>
