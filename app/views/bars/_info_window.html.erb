@@ -1,2 +1,11 @@
-<h2><%= bar.name %></h2>
-<p><%= bar.address %></p>
+<div class="card-trip" style="width: 100%; border-radius: 5px; padding: 0">
+ <%= image_tag bar.photo %>
+<div class="card-trip-infos">
+  <div>
+    <h2><%= bar.name %></h2>
+      <p><%= bar.address %></p>
+      <p><%= bar.rating %> <i class="fa-solid fa-star"></i></p>
+        <%= link_to "vote", event_votes_path(@event, bar: bar), data: { turbo_method: :post }, class: "btn btn-ghost btn-sm", style: "background: #6d5938" %>
+  </div>
+  </div>
+</div>
