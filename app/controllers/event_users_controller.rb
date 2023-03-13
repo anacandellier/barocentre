@@ -69,6 +69,7 @@ class EventUsersController < ApplicationController
       }]
   end
 
+  
   private
 
   def event_user_params
