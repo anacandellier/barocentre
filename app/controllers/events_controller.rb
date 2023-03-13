@@ -25,16 +25,26 @@ class EventsController < ApplicationController
     # quand on clique sur choisir, aller sur la route "choose", et passer en argument dans l'url l'ID du bar
     # stocker l'id du bar dans 'selected_bar_id' de l'event`
     @bar = Bar.find(params[:bar])
-    @bar.update(selected: true)
+    @event = Event.find(params[:event_id])
+    @event.selected_bar = @bar
+    @event.save
+    @event.closed!
     # sauvegarder l'event
     # et redirifer sur la page itinéraire
-    redirect_to event_itineraire_path(Event.find(params[:event_id]))
+    redirect_to event_itineraire_path(@event)
+
   end
 
   def itineraire
     @event = Event.find(params[:event_id])
     @bar = @event.selected_bar
     @event_users = @event.event_users
+    @markers = [{
+      lat: @bar.latitude,
+      lng: @bar.longitude,
+      marker_html: render_to_string(partial: "marker")
+    }]
+
   end
 
   def show
