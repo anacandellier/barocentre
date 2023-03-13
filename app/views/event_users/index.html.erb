@@ -6,7 +6,9 @@
         <p class="border-bottom border-secondary pb-2">L'événement <strong><%= @event.name %></strong> est organisé par : <strong><%= @event.user.username %></strong></p>
         <h1>VOICI LES COPAINS <i class="fa-solid fa-user-group"></i> </h1>
           <div class="d-flex justify-content-center mb-3">
+          <% if current_user == @event.user %>
             <%= link_to "Let's go", barocentre_path, class: "btn btn-ghost" %>
+          <% end %>
           </div>
       </div>
       <div class="row d-flex ms-1 me-1 justify-content-center">
