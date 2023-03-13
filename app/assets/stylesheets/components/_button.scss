@@ -1,3 +1,11 @@
+.index {
+  .btn-wrapper {gap: 0.2rem}
+  .btn-ghost {
+    width: calc(50% - 0.1rem);
+    max-width: 200px;
+  }
+}
+
 .btn-ghost {
   background-color: #deb773;
   color: #ffffff;
