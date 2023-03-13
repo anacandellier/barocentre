@@ -1,7 +1,7 @@
 class Event < ApplicationRecord
   belongs_to :user
-  has_many :event_users
-  has_many :bars
+  has_many :event_users, dependent: :destroy
+  has_many :bars, dependent: :destroy
   validates :name, presence: true
   validates :date, presence: true
   enum status: {
