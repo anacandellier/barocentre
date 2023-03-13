@@ -1,7 +1,6 @@
-
+Event.destroy_all
 Bar.destroy_all
 EventUser.destroy_all
-Event.destroy_all
 User.destroy_all
 
 laura = User.new(email: "laura@barocentre.com", password: "123456", password_confirmation: "123456", username: "Laura")
