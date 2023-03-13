@@ -7,14 +7,16 @@ class BarsController < ApplicationController
     @event = Event.find(params[:event_id])
     get_bars_from_google(@event)
     @bars = Bar.where(event_id: params[:event_id])
-     @markers = @bars.map do |bar|
-       {
-         lat: bar.latitude,
-         lng: bar.longitude,
-         info_window_html: render_to_string(partial: "info_window", locals: {bar: bar}),
-          marker_html: render_to_string(partial: "marker", locals: {bar: bar})
-       }
+    @markers = @bars.map do |bar|
+      {
+        lat: bar.latitude,
+        lng: bar.longitude,
+        info_window_html: render_to_string(partial: "info_window", locals: {bar: bar}),
+        marker_html: render_to_string(partial: "marker", locals: {bar: bar})
+      }
      end
+
+
   end
 
   def map
@@ -28,6 +30,11 @@ class BarsController < ApplicationController
           marker_html: render_to_string(partial: "marker", locals: {bar: bar})
       }
     end
+    @barycenter_marker = [{
+      lat: @event.barycenter_lat,
+      lng: @event.barycenter_lng,
+      marker_html: render_to_string(partial: "marker")
+    }]
   end
 
   def create
@@ -71,21 +78,23 @@ class BarsController < ApplicationController
     response = https.request(request)
     data = JSON.parse(response.read_body)
     # pour chacun de ces bars, tu récupères la place id & tu t'en sers pour un second call si nécessaire
-      # Extraire le nom, la note et l'adresse`
-    unless event.bars.size >= 5
-      data["results"][0..4].each do |bar|
-        photo_url = URI("https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=#{bar["photos"][0]["photo_reference"]}&key=#{ENV['GOOGLE_API_KEY']}")
-        new_bar = Bar.create({
-          name: bar["name"],
-          rating: bar["rating"],
-          address: bar["vicinity"],
-          placeid: bar["place_id"],
-          photo: photo_url,
-          event_id: event.id,
-          latitude: bar["geometry"]["location"]["lat"],
-          longitude: bar["geometry"]["location"]["lng"]
-        })
-      end
+    # Extraire le nom, la note et l'adresse`
+    counter = 0
+    data["results"]&.each do |bar|
+      photo_url = URI("https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=#{bar["photos"]&.first&.dig("photo_reference")}&key=#{ENV['GOOGLE_API_KEY']}")
+      new_bar = Bar.create(
+        name: bar["name"],
+        rating: bar["rating"],
+        address: bar["vicinity"],
+        placeid: bar["place_id"],
+        photo: photo_url,
+        event: event,
+        latitude: bar.dig("geometry", "location", "lat"),
+        longitude: bar.dig("geometry", "location", "lng")
+      )
+      counter += 1 unless new_bar.nil?
+      break if counter >= 5
     end
+    # end
   end
 end
