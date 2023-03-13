@@ -8,6 +8,16 @@ laura = User.new(email: "laura@barocentre.com", password: "123456", password_con
 hugo = User.new(email: "hugo@barocentre.com", password: "123456", password_confirmation: "123456", username: "Hugo")
 paul = User.new(email: "paul@barocentre.com", password: "123456", password_confirmation: "123456", username: "Paul")
 noemie = User.new(email: "noemie@barocentre.com", password: "123456", password_confirmation: "123456", username: "Noémie")
+# amelie = User.new(email: "amelie@barocentre.com", password: "123456", password_confirmation: "123456", username: "Amelie")
+# louis = User.new(email: "louis@barocentre.com", password: "123456", password_confirmation: "123456", username: "Louis")
+# thomas = User.new(email: "thomas@barocentre.com", password: "123456", password_confirmation: "123456", username: "Thomas")
+
+
+
+
+
+
+
 
 laura.photo.attach(
   io: File.open('public/images/laura.png'),

@@ -19,48 +19,56 @@
   cursor: pointer;
   box-sizing: border-box;
   width: 100%;
-  font-size: 12px;
-  text-align: left;
-  padding: 10px 10px 30px 10px;
+  font-size: 1rem;
+  text-align: center;
+  padding: 1rem;
   border: 1px solid #EAEAEA;
-  border-radius: 4px;
+  border-radius: 10px;
   background-color: white;
 }
 
 .category-selector:checked + label {
-  color: white !important;
+  color: #00235B !important;
 }
 
 
 #event_user_transport_driving + label {
-  color: #FD1015;
+  background-color: #00235B;
+  color: yellow;
+  &:before {
+    font-family: "Font Awesome 6 Free"; font-weight: 900; content: "\f1b9";
+  }
 }
 
 #event_user_transport_driving:checked + label {
-  background-color: #FD1015;
-  border-color: #FD1015;
+  background-color: yellow;
+  border-color: yellow;
 }
 
 
 #event_user_transport_bicycling + label {
-  color: #FFC65A;
-  content: '';
+  background-color: #00235B;
+  color: yellow;
+  &:before {
+    font-family: "Font Awesome 6 Free"; font-weight: 900; content: "\f84a";
+  }
 }
 
 #event_user_transport_bicycling:checked + label {
-  background-color: #FFC65A;
-  border-color: #FFC65A;
-}
-#event_user_transport_bicycling + label:before {
-  font-family: "Font Awesome 6 Free"; font-weight: 900; content: "\f84a";
+  background-color: yellow;
+  border-color: yellow;
 }
 
 
 #event_user_transport_transit + label {
-  color: #62DDF5;
+  background-color: #00235B;
+  color: yellow;
+  &:before {
+    font-family: "Font Awesome 6 Free"; font-weight: 900; content: "\f239";
+  }
 }
 
 #event_user_transport_transit:checked + label {
-  background-color: #62DDF5;
-  border-color: #62DDF5;
+  background-color: yellow;
+  border-color: yellow;
 }
