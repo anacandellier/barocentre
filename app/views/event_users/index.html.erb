@@ -1,14 +1,20 @@
 
-<div class="wraper">
+<div class="index wraper">
   <div class="justify-content-center">
     <div class="col-sm-3 col-lg-12 ps-5 pe-5 pt-3 pb-2">
       <div class="text-center border-bottom border-secondary mt-2">
         <p class="border-bottom border-secondary pb-2">L'événement <strong><%= @event.name %></strong> est organisé par : <strong><%= @event.user.username %></strong></p>
         <h1>VOICI LES COPAINS <i class="fa-solid fa-user-group"></i> </h1>
-          <div class="d-flex justify-content-center mb-3">
+          <div class="d-flex justify-content-center mb-3 btn-wrapper">
           <% if current_user == @event.user %>
-            <%= link_to "Let's go", barocentre_path, class: "btn btn-ghost" %>
+            <%= link_to "Trouver le bar", barocentre_path, class: "btn btn-ghost" %>
           <% end %>
+            <span class="share-btn btn-ghost" data-controller="share"
+                data-action="click->share#share"
+                data-share-title-value="<%= @event.name %>"
+                data-share-url-value="<%= new_event_event_user_url(@event) %>">
+              Partager aux copains
+            </span>
           </div>
       </div>
       <div class="row d-flex ms-1 me-1 justify-content-center">
