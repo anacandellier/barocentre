@@ -19,7 +19,7 @@ class BarsController < ApplicationController
   def map
     @event = Event.find(params[:event_id])
     @bars = Bar.where(event_id: params[:event_id])
-    @markers = @bars.map do |bar|votes
+    @markers = @bars.map do |bar|
       {
         lat: bar.latitude,
         lng: bar.longitude,
