@@ -35,6 +35,13 @@
                   <%= event.user.username %>
                 <%end%></h2>
             <p style="font-size: 9px"><strong><i class="fa-sharp fa-solid fa-calendar-days"></i> <%= event.date.strftime("%A %-d %B %Y à %k:%M") %></strong></p>
+            <p style="font-size: 9px"><strong><i class="fa-solid fa-user-group"></i> <%= event.event_users.count %>
+              <% if event.event_users.count == 1 %>
+                <%="invité"%>
+              <% else %>
+                <%="invités"%>
+              <% end %>
+                </strong></p>
             <p style="font-size: 9px"><strong><i class="fa-solid fa-user-group"></i> <%= translate(event.status) %></strong></p>
           </div>
         </div>
