@@ -22,7 +22,7 @@ class BarsController < ApplicationController
   def map
     @event = Event.find(params[:event_id])
     @bars = Bar.where(event_id: params[:event_id])
-    @markers = @bars.map do |bar|
+    @markers = @bars.map do |bar|votes
       {
         lat: bar.latitude,
         lng: bar.longitude,
@@ -54,9 +54,9 @@ class BarsController < ApplicationController
   end
 
   def classment
-    @event =  Event.find(params[:event_id])
-    @event_users =  Event.find(params[:event_id]).event_users
-    @bars = Bar.where(event_id: params[:event_id]).sort { |a,b| b.votes.count <=> a.votes.count }
+    @event = Event.find(params[:event_id])
+    @event_users = Event.find(params[:event_id]).event_users
+    @bars = Bar.where(event_id: params[:event_id]).sort { |a, b| b.votes.count <=> a.votes.count }
   end
 
   private
