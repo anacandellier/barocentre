@@ -10,9 +10,11 @@
     <h1 class="align-items-center"> "<%= @event.name %>" à démarré </h1>
     <br>
     <br>
-    <p> Partage ton lien pour inviter tes copains :</p>
     <div class ="m-1">
-        <p><%= root_url %><%= invite_path(@event)%></p>
+          <div class="share-btn button2" data-controller="share"
+          data-action="click->share#share"
+          data-share-title-value=<%= @event.name %>
+          data-share-url-value=<%= new_event_event_user_url(@event) %>>Partager aux copains</div>
     </div>
     <br><br>
     <% unless current_user && current_user.participates_to_event?(@event) %>
