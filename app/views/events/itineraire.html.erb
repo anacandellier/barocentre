@@ -10,6 +10,7 @@
       <h2><%= @bar.name %></h2>
       <p><%= @bar.address %></p>
       <p><%= @bar.rating %> <i class="fa-solid fa-star"></i></p>
+      <%= link_to 'Ouvrir Gmaps', "https://www.google.com/maps/dir/?api=1&destination=bar&destination_place_id=#{@bar.placeid}", class: 'btn btn-primary', target: '_blank' %>
     </div>
   </div>
 </div>
