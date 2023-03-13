@@ -11,7 +11,8 @@ Rails.application.routes.draw do
   get "events/:event_id/event_users/map", to: "event_users#map", as: :map_event_users # page de la map avec les event_users
   resources :events, only: [:new, :create, :show] do # route du new, show, create event
     get "/classment", to: "bars#classment", as: :classment # page du classement
-    get "/itineraire", to: "bars#itineraire", as: :itineraire # page de l'itinéraire
+    get :choose_bar
+    get "/itineraire", to: "events#itineraire", as: :itineraire # page de l'itinéraire
     resources :votes, only: [:create]
     resources :event_users, only: [:new, :create, :index] # route du new, create, index event_user
   end
