@@ -20,7 +20,7 @@
                         <p><%= bar.rating %> <i class="fa-solid fa-star"></i></p>
                       </div>
                     </div>
-                        <%= link_to "Choisir", event_itineraire_path, class: "btn btn-ghost btn-sm" %>
+                        <%= link_to "Choisir", event_choose_bar_path(@event, bar: bar), class: "btn btn-ghost btn-sm" %>
                 </div>
               <% end %>
             </div>
