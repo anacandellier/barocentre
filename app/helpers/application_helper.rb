@@ -16,6 +16,8 @@ module ApplicationHelper
       return event_event_users_path(event)
     elsif event.vote?
       return bars_path(event)
+    elsif event.closed?
+      return event_itineraire_path(event)
     end
   end
 end

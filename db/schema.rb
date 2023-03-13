@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_13_153106) do
-
+ActiveRecord::Schema[7.0].define(version: 2023_03_13_162605) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -57,7 +56,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_13_153106) do
     t.float "rating"
     t.string "placeid"
     t.string "photo"
-    t.boolean "selected", default: false
     t.index ["event_id"], name: "index_bars_on_event_id"
   end
 
@@ -86,6 +84,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_13_153106) do
     t.bigint "user_id"
     t.datetime "date", precision: nil
     t.integer "status", default: 0
+    t.bigint "bar_id"
+    t.index ["bar_id"], name: "index_events_on_bar_id"
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 
@@ -117,6 +117,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_13_153106) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "event_users", "events"
   add_foreign_key "event_users", "users"
+  add_foreign_key "events", "bars"
   add_foreign_key "events", "users"
   add_foreign_key "votes", "bars"
   add_foreign_key "votes", "event_users"
