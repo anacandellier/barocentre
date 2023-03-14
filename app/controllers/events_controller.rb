@@ -38,6 +38,7 @@ class EventsController < ApplicationController
   def itineraire
     @event = Event.find(params[:event_id])
     @bar = @event.selected_bar
+    redirect_to :back, notice: "Il y a eu une erreur, veuillez recommencer" if @bar.nil?
     @event_users = @event.event_users
     @markers = [{
       lat: @bar.latitude,
