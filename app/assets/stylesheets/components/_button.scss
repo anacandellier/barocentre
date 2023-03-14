@@ -7,7 +7,7 @@
 }
 
 .btn-ghost {
-  background-color: #deb773;
+  background-color:$darkblue;
   color: #ffffff;
   padding: 6px 22px;
   border-radius: 50px;
@@ -23,12 +23,12 @@
   color: white;
   padding: 8px 24px;
   border-radius: 4px;
-  background: #670BFF;
+  background: $blue;
   transition: background 0.3s ease;
 }
 
 .btn-flat:hover {
-  background: #4D04C4;
+  background:$darkblue;
   color: white;
 }
 
@@ -66,4 +66,13 @@
     color: white;
     border: none;
   }
+}
+
+.btn-secondary {
+  background-color: $grayback;
+  color: #ffffff;
+  padding: 6px 22px;
+  border-radius: 20px;
+  font-weight: lighter;
+  transition: background 0.3s ease;
 }
