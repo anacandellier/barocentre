@@ -1,4 +1,3 @@
-
 <div class="wraper" style="height: 100%">
   <div class="container p-5">
     <div class="d-flex flex-column justify-content-center align-items-center" style="background: #ede3d3 ; width: 300px; height: 1000px; margin: 0 auto; border-radius: 3px; box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);">
@@ -9,24 +8,14 @@
         <% end %>
         <br><br>
 
-      <%= simple_form_for @event, html: {
-                      data: {
-                        controller: 'flatpickr'
-                      }
-                    }  do |f| %>
+    <%= simple_form_for(@event) do |f| %>
       <div class="form-inputs">
         <%= f.input :name,
                     label: false,
                     placeholder: "Nom de l'événement" %>
         <%= f.input :date,
                     label: false,
-                    as: :string,
-                    input_html: {
-                      class: "d-none",
-                      data: {
-                        flatpickr_target: 'dateInput',
-                      }
-                    } %>
+                    html5: true %>
         <%= f.input :event_status,
                     input_html: { value: "0" },
                     as: :hidden %>
@@ -34,8 +23,9 @@
       <br>
 
       <div class="form-actions">
-         <%= link_to "<", root_path, class:"btn btn-secondary" %>
+      
         <%= f.button :submit, "Je crée mon événement", class: "btn btn-ghost" %>
+
       </div>
     <% end %>
 </div>
