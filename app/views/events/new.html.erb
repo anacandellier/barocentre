@@ -33,11 +33,9 @@
       </div>
       <br>
 
-          <div class="form-actions d-flex flex-column justify-content-center">
-            <%= f.button :submit, "Je crée mon événement", class: "btn btn-ghost m-2" %>
-            <%= link_to "back", root_path, class: "btn btn-ghost m-2" %>
-          </div>
-        <% end %>
-    </div>
-  </div>
+      <div class="form-actions">
+         <%= link_to "<", root_path, class:"btn btn-secondary" %>
+        <%= f.button :submit, "Je crée mon événement", class: "btn btn-ghost" %>
+      </div>
+    <% end %>
 </div>
