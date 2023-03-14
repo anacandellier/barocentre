@@ -3,14 +3,14 @@
   data-map-markers-value="<%= @markers.to_json %>"
   data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
 </div>
-<div class="col-sm-12 col-lg-3 card-product m-3" style="width: 300px; border-radius: 5px; padding: 0; position : fixed; bottom : 50px; right: 20px">
-  <%= image_tag @bar.photo %>
+<div class="card-product" style="width: 300px; border-radius: 5px; padding: 0; position : fixed; bottom : 50px; right: 35px">
+  <%= image_tag @bar.photo, class: "bar-img" %>
   <div class="card-product-infos">
     <div>
       <h2><%= @bar.name %></h2>
       <p><%= @bar.address %></p>
       <p><%= @bar.rating %> <i class="fa-solid fa-star"></i></p>
-      <%= link_to 'Ouvrir Gmaps', "https://www.google.com/maps/dir/?api=1&destination=bar&destination_place_id=#{@bar.placeid}", class: 'btn btn-primary', target: '_blank' %>
     </div>
   </div>
 </div>
+      <%= link_to 'Ouvrir Gmaps', "https://www.google.com/maps/dir/?api=1&destination=bar&destination_place_id=#{@bar.placeid}", class: 'btn btn-ghost', target: '_blank', style: "position : fixed; bottom : 30px; right: 20px" %>
