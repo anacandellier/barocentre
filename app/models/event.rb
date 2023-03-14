@@ -1,7 +1,7 @@
 class Event < ApplicationRecord
   belongs_to :user
   has_many :event_users, dependent: :destroy
-  has_many :bars, dependent: :destroy
+  has_many :bars
   belongs_to :selected_bar, class_name: :Bar, foreign_key: :bar_id, optional: true
   validates :name, presence: true
   validates :date, presence: true
@@ -23,4 +23,3 @@ class Event < ApplicationRecord
   }
 
 end
-  
