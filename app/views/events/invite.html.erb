@@ -1,4 +1,4 @@
-<div class="container hauteur flex-column square-box d-flex justify-content-center align-items-center">
+<div class="container hauteur flex-column square-box d-flex justify-content-center align-items-center mt-5">
   <% if user_signed_in?%>
     <% if current_user.photo.attached? %>
       <%= cl_image_tag current_user.photo.key, :width=>250, :height=>250, :radius=>"max", :crop=>"fill" %>

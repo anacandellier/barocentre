@@ -34,12 +34,14 @@
                             <% end %>
                         </div>
                           <div>
+                          <% if bar.votes.count <= 5 %>
                             <% bar.votes.each do |vote|  %>
                               <%= cl_image_tag(vote.user.photo.key,class: "miniavatar",
                                     :transformation=>[
                                     {:gravity=>"face", :height=>250, :width=>250, :crop=>"crop"},
                                     {:fetch_format=>"auto"}]) %>
                               <% end %>
+                          <% end %>
                           </div>
                         </div>
                         <p><%= bar.rating %> <i class="fa-solid fa-star"></i></p>

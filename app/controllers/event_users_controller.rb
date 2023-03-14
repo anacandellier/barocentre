@@ -73,7 +73,7 @@ class EventUsersController < ApplicationController
   private
 
   def event_user_params
-    params.require(:event_user).permit(:user_address, :transport)
+    params.require(:event_user).permit(:user_address, :transport, :latitude, :longitude)
   end
 
   def first_barycenter
@@ -122,7 +122,7 @@ class EventUsersController < ApplicationController
     @eventusers.each do |eventuser|
       url = "https://maps.googleapis.com/maps/api/directions/json?origin=#{eventuser.latitude},#{eventuser.longitude}&destination=#{bary_lat},#{bary_lng}&mode=#{eventuser.transport}&arrival_time=#{@event.date.to_i}&key=#{ENV['GOOGLE_API_KEY']}"
       result = JSON.parse(URI.open(url).read)
-      unless result.dig('available_travel_modes')&.map(&:downcase)&.include?(eventuser.transport)
+      if result.dig('available_travel_modes')
         url = "https://maps.googleapis.com/maps/api/directions/json?origin=#{eventuser.latitude},#{eventuser.longitude}&destination=#{bary_lat},#{bary_lng}&mode=walking&arrival_time=#{@event.date.to_i}&key=#{ENV['GOOGLE_API_KEY']}"
         result = JSON.parse(URI.open(url).read)
       end
@@ -144,10 +144,10 @@ class EventUsersController < ApplicationController
     sum_lng = 0
     sum_speed = 0
     @eventusers.each do |eventuser|
-      sum_speed += eventuser.speed
-      sum_lat += eventuser.latitude * eventuser.speed
+      sum_speed += (1/eventuser.speed)
+      sum_lat += eventuser.latitude * (1/eventuser.speed)
 
-      sum_lng += eventuser.longitude * eventuser.speed
+      sum_lng += eventuser.longitude * (1/eventuser.speed)
 
     end
     if sum_speed != 0
