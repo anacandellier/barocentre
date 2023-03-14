@@ -48,7 +48,7 @@
   margin-top: 7px;
 }
 
-.card-product img {
+.card-product .bar-img {
   height: 100%;
   width: 120px;
   object-fit: cover;
@@ -56,14 +56,14 @@
 
 .card-product h2 {
   color: white;
-  font-size: 10px;
+  font-size: 13px;
   font-weight: bold;
   margin: 0;
 }
 
 .card-product p {
   color: white;
-  font-size: 8px;
+  font-size: 12px;
   line-height: 1.4;
   opacity: .7;
   margin-bottom: 0;
