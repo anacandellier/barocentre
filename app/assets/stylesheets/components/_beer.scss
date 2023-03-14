@@ -8,7 +8,7 @@ $size-anim: 120px;
 
 .badge {
   cursor: help;
-  background: darken($background, 20%);
+  background: $darkblue;
   height: $size-anim * 1;
   width: $size-anim * 1;
   min-width: $size-anim * 1;
