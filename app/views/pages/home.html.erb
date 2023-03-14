@@ -2,20 +2,20 @@
 <div class="wraper">
   <div class="container hauteur flex-column square-box d-flex justify-content-center align-items-center" style="height:700px">
     <div class="badge anim">
-    <div class="beer-animation-wrapper">
-      <div class="beer">
-        <div class="foam"></div>
+      <div class="beer-animation-wrapper">
+        <div class="beer">
+          <div class="foam"></div>
+        </div>
       </div>
     </div>
-  </div>
-  <br><br>
-  <div class="d-flex">
-    <% if user_signed_in?%>
-      <div class="m-1"><%= link_to "TRINQUONS !", new_event_path, class: "btn btn-ghost" %></div>
-      <%# <div class="m-1"><%= link_to "Mes Events", dashboard_path, class: "btn btn-ghost" %></div> 
-    <% else %>
-      <div class ="m-1"><%= link_to "Inscription", new_user_registration_path, class: "btn btn-ghost" %></div>
-      <div class="m-1"><%= link_to "Connexion", new_user_session_path, class: "btn btn-ghost" %></div>
-    <% end %>
-  </div>
+    <br><br>
+    <div class="d-flex">
+      <% if user_signed_in?%>
+        <div class="m-1"><%= link_to "TRINQUONS !", new_event_path, class: "btn btn-ghost" %></div>
+        <%# <div class="m-1"><%= link_to "Mes Events", dashboard_path, class: "btn btn-ghost" %></div>
+      <% else %>
+        <div class ="m-1"><%= link_to "Inscription", new_user_registration_path, class: "btn btn-ghost" %></div>
+        <div class="m-1"><%= link_to "Connexion", new_user_session_path, class: "btn btn-ghost" %></div>
+      <% end %>
+    </div>
 </div>
