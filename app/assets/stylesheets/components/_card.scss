@@ -41,7 +41,7 @@
 .card-product {
   overflow: hidden;
   height: 120px;
-  background: #deb773;
+  background: $light-gray;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   display: flex;
   align-items: center;
@@ -62,14 +62,14 @@
 }
 
 .card-product h2 {
-  color: white;
+  color: #001D3D;
   font-size: 13px;
   font-weight: bold;
   margin: 0;
 }
 
 .card-product p {
-  color: white;
+  color: $darkblue;
   font-size: 12px;
   line-height: 1.4;
   opacity: .7;
