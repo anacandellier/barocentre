@@ -15,3 +15,6 @@ application.register("map", MapController)
 
 import ShareController from "./share_controller"
 application.register("share", ShareController)
+
+import ToggleElementsController from "./toggle_elements_controller"
+application.register("toggle-elements", ToggleElementsController)

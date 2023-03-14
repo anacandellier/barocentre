@@ -182,6 +182,8 @@ class EventUsersController < ApplicationController
     counter = 0
     data["results"]&.each do |bar|
       photo_url = URI("https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=#{bar["photos"]&.first&.dig("photo_reference")}&key=#{ENV['GOOGLE_API_KEY']}")
+      next if bar.dig("rating").nil?
+
       new_bar = Bar.create(
         name: bar["name"],
         rating: bar["rating"],
@@ -195,7 +197,6 @@ class EventUsersController < ApplicationController
       counter += 1 unless new_bar.nil?
       break if counter >= 5
     end
-    # end
   end
 
 end
