@@ -15,9 +15,14 @@ module ApplicationHelper
     elsif event.open?
       return event_event_users_path(event)
     elsif event.vote?
-      return bars_path(event)
+      if EventUser.where(user: current_user, event: event).first.votes.present?
+        return event_classment_path(event)
+      else
+        return bars_path(event)
+      end
     elsif event.closed?
       return event_itineraire_path(event)
     end
   end
+
 end
