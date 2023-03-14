@@ -52,7 +52,11 @@ class EventUsersController < ApplicationController
     @event = Event.find(params[:event_id])
     @eventusers = @event.event_users
     second_barycenter
-    get_bars_from_google(@event)
+    event_bars = get_bars_from_google(@event)
+    event_bars.each do |bar|
+      bar.event = @event
+      bar.save
+    end
     @markers = @eventusers.geocoded.map do |eventuser|
       {
         lat: eventuser.latitude,
@@ -168,7 +172,7 @@ class EventUsersController < ApplicationController
   def get_bars_from_google(event)
     # renvoie une réponse de google avec des bars à proximité du baeycentre
     # filtre ces bars selon ton call cad + 4.5 & open quand ça se passe
-    url = URI("https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword=bar&type=bar&location=#{event.barycenter_lat},#{event.barycenter_lng}&radius=500&key=#{ENV['GOOGLE_API_KEY']}")
+    url = URI("https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword=bar&type=bar&location=#{event.barycenter_lat},#{event.barycenter_lng}&rankby=distance&key=#{ENV['GOOGLE_API_KEY']}")
 
     https = Net::HTTP.new(url.host, url.port)
     https.use_ssl = true
@@ -179,24 +183,25 @@ class EventUsersController < ApplicationController
     data = JSON.parse(response.read_body)
     # pour chacun de ces bars, tu récupères la place id & tu t'en sers pour un second call si nécessaire
     # Extraire le nom, la note et l'adresse`
+    bars = []
     counter = 0
     data["results"]&.each do |bar|
       photo_url = URI("https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=#{bar["photos"]&.first&.dig("photo_reference")}&key=#{ENV['GOOGLE_API_KEY']}")
       next if bar.dig("rating").nil?
-
       new_bar = Bar.create(
         name: bar["name"],
         rating: bar["rating"],
         address: bar["vicinity"],
         placeid: bar["place_id"],
         photo: photo_url,
-        event: event,
         latitude: bar.dig("geometry", "location", "lat"),
         longitude: bar.dig("geometry", "location", "lng")
       )
+      bars << new_bar
       counter += 1 unless new_bar.nil?
-      break if counter >= 5
+      break if counter >= 10
     end
+    bars = bars.sort_by {|bar| bar.rating}.reverse.first(5)
   end
 
 end

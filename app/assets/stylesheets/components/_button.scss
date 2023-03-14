@@ -71,9 +71,21 @@
 
 .btn-secondary {
   background-color: $grayback;
+  text-decoration: none;
   color: #ffffff;
   padding: 6px 22px;
   border-radius: 20px;
   font-weight: lighter;
   transition: background 0.3s ease;
+}
+
+.share-btn {
+  background-color:$orange;
+  color: #ffffff;
+  padding: 20px 25px;
+  border-radius: 50px;
+  font-weight: lighter;
+  text-decoration: none;
+  transition: background 0.3s ease;
+
 }
