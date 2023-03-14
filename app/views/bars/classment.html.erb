@@ -7,27 +7,41 @@
 
           <div class="ranking-wrapper" data-controller="toggle-elements">
           <%# Pour afficher le mot "cloturer le vote, qui va faire apparaitre le bouton choisir" %>
+          <% if current_user == @event.user %>
           <div class="d-flex justify-content-center mt-3" style="width:100%">
             <span class="choose-btn btn-ghost"
                   data-action="click->toggle-elements#toggle">
                 Clôture le vote
             </span>
           </div>
-
+          <% end %>
             <div class="row justify-content-center p-3">
               <% @bars.each do |bar| %>
                 <div class="card-product justify-content-between m-2" style="width: 600px ;border-radius: 5px; padding: 0">
                   <div class="d-flex align-items-center" style="height:100%">
-                  <img src="<%= bar.photo %>" class="me-2"/>
+                  <img src="<%= bar.photo %>" class="bar-img me-2"/>
                     <div class="card-product-infos d-flex justify-content-between">
                       <div>
                         <h2><%= bar.name %></h2>
                         <p><%= bar.address %></p>
-                        <% if bar.votes.count <= 1 %>
-                        <p><strong><%= bar.votes.count %> vote pour ce bar</strong></p>
-                        <% else %>
-                        <p><strong><%= bar.votes.count %> votes pour ce bar</strong></p>
-                        <% end %>
+
+                       <div class="d-flex flex-row align-items-center">
+                        <div class="me-2">
+                            <% if bar.votes.count <= 1 %>
+                            <p><strong><%= bar.votes.count %> Vote</strong></p>
+                            <% else %>
+                              <p><strong><%= bar.votes.count %> Votes</strong></p>
+                            <% end %>
+                        </div>
+                          <div>
+                            <% bar.votes.each do |vote|  %>
+                              <%= cl_image_tag(vote.user.photo.key,class: "miniavatar",
+                                    :transformation=>[
+                                    {:gravity=>"face", :height=>250, :width=>250, :crop=>"crop"},
+                                    {:fetch_format=>"auto"}]) %>
+                              <% end %>
+                          </div>
+                        </div>
                         <p><%= bar.rating %> <i class="fa-solid fa-star"></i></p>
                       </div>
                     </div>
