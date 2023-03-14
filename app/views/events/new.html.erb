@@ -1,11 +1,12 @@
-<div class="container hauteur flex-column square-box d-flex justify-content-center align-items-center">
-    <% if current_user.photo.attached? %>
-      <%= cl_image_tag current_user.photo.key, :width=>250, :height=>250, :radius=>"max", :crop=>"fill", class: "rounded-circle" %>
-    <% else %>
-      <%= image_tag "https://as1.ftcdn.net/v2/jpg/03/53/11/00/1000_F_353110097_nbpmfn9iHlxef4EDIhXB1tdTD0lcWhG9.jpg", class: "rounded-circle", style: " width: 250px"%>
-    <% end %>
-    <br><br>
-
+<div class="wraper" style="height: 100%">
+  <div class="container p-5">
+    <div class="d-flex flex-column justify-content-center align-items-center" style="background: #ede3d3 ; width: 300px; height: 1000px; margin: 0 auto; border-radius: 3px; box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);">
+        <% if current_user.photo.attached? %>
+          <%= cl_image_tag current_user.photo.key, :width=>200, :height=>200, :radius=>"max", :crop=>"fill", class: "rounded-circle" %>
+        <% else %>
+          <%= image_tag "https://as1.ftcdn.net/v2/jpg/03/53/11/00/1000_F_353110097_nbpmfn9iHlxef4EDIhXB1tdTD0lcWhG9.jpg", class: "rounded-circle", style: " width: 250px"%>
+        <% end %>
+        <br><br>
 
     <%= simple_form_for(@event) do |f| %>
       <div class="form-inputs">

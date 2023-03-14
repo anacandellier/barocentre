@@ -12,7 +12,6 @@
     <br>
     <br>
     <div class ="m-1">
-
       <span class="share-btn" data-controller="share"
           data-action="click->share#share"
           data-share-title-value="<%= @event.name %>"
@@ -30,6 +29,7 @@
       <div class ="m-1">
         <%= link_to "Continuer", event_event_users_path(@event), class: "btn-ghost" %>
         <%= link_to "back", root_path, class: "btn-secondary" %>
+
       </div>
     <% end %>
   </div>
