@@ -1,0 +1,694 @@
+/*
+# ================================================
+# original design
+# https://dribbble.com/shots/6912135-One-More-Beer
+# by Elena Maykhrych
+# ================================================
+*/
+
+
+
+:root {
+  --brick-width: 15%;
+  --brick-gap: 2px;
+  --brick-color: #1466AE;
+  --wall-color: #183AA0;
+  --table-color: #0B3C80;
+  --glass-width: 130px;
+  --glass-small-width: 60px;
+  --glass-height: 200px;
+  --glass-small-height: 90px;
+  --glass-color: hsla(195, 100%, 50%, 0.541);
+  --dark-blue: #030630;
+  --blue: #008ACE;
+  --light-blue: #0FACDF;
+  --mug-width: calc(33vw - 50px);
+  --mug-shadow-width: calc(var(--glass-width) + 10%);
+  --mug-shadow-width-small: calc(var(--mug-shadow-width) /2);
+  --beer-color: rgb(230,166,40);
+  --another-beer-color: #D38115;
+  --animation-duration: 1.2s;
+  --animation-delay: 0s;
+  --bubble-animation-delay: 0s;
+  --beer-height: calc(100% - 26.5%);
+  --barrel-bg: #0B3C80;
+  --barrel-left-offset: calc(50% + var(--glass-width)/4);
+  --barrel-height: 420px;
+  --segment-widht: 170px;
+  --handle-width: 17px;
+  --flow-width: 14px;
+  --flow-height: 195px;
+  --flow-animation-delay: .5s;
+}
+
+*, *:after, *:before {
+  box-sizing: border-box;
+}
+
+body {
+  overflow: hidden;
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  touch-action: none;
+}
+
+.wall {
+  background-color: var(--wall-color);
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.brick {
+  flex-basis: var(--brick-width);
+  background-color: var(--brick-color);
+  margin: var(--brick-gap);
+}
+
+.row:nth-child(even) .brick:first-child {
+  display: none;
+}
+
+.row:nth-child(even) .brick:nth-child(2) {
+  margin-left: calc(var(--brick-width) / 3);
+}
+
+.row:nth-child(even) .brick:last-child {
+  margin-right: calc(var(--brick-width) / 3);
+}
+
+.row:nth-child(even) .brick:nth-child(2), .row:nth-child(even) .brick:last-child {
+  position: relative;
+}
+
+.row:nth-child(even) .brick:nth-child(2):before, .row:nth-child(even) .brick:last-child:after {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: var(--brick-color);
+}
+
+.row:nth-child(even) .brick:nth-child(2):before {
+  left: calc(-100% - var(--brick-gap) * 2);
+}
+.row:nth-child(even) .brick:last-child:after {
+  left: calc(100% + var(--brick-gap) * 2);
+}
+
+.table {
+  position: relative;
+  background-color: var(--table-color);
+  height: 30vh;
+}
+
+.mugs {
+  position: absolute;
+  top: -50%;
+  width: auto;
+  height: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  animation-name: mugs_slider;
+  animation-duration: var(--animation-duration);
+  animation-timing-function: linear;
+  animation-delay: var(--animation-delay);
+  animation-iteration-count: infinite;
+}
+
+@media (max-width: 425px) {
+  .mugs {
+    top: -20%;
+  }
+}
+
+.mug {
+  display: inline-block;
+  position: relative;
+  width: var(--mug-width);
+  height: 100%;
+  margin: 0 25px;
+}
+
+@media (max-width: 425px) {
+  .mug {
+    height: 70%;
+  }
+}
+
+.mug:after {
+  content: '';
+  position: absolute;
+  display: block;
+  bottom: 5%;
+  width: var(--mug-shadow-width);
+  height: 50px;
+  left: calc(50% - var(--mug-shadow-width)/2);
+  background-color: var(--dark-blue);
+  border-radius: 50%;
+}
+
+@media (max-width: 768px) {
+  .mug:after {
+    height: 30px;
+    width: var(--mug-shadow-width-small);
+    left: calc(50% - var(--mug-shadow-width-small)/2);
+/*     bottom: 5%; */
+  }
+}
+
+.glass {
+  position: absolute;
+  bottom: 50px;
+  left: calc(50% - var(--glass-width)/2);
+  height: var(--glass-height);
+  width: var(--glass-width);
+  background-color: var(--glass-color);
+  border-radius: 5%;
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .glass {
+    bottom: 30px;
+    left: calc(50% - var(--glass-small-width)/2);
+    height: var(--glass-small-height);
+    width: var(--glass-small-width);
+  }
+}
+@media (max-width: 425px) {
+  .glass {
+    bottom: 25px;
+  }
+}
+
+.glass:before {
+  content: '';
+  position: absolute;
+  top: 90%;
+  height: 15%;
+  width: 100%;
+  background-color: white;
+  border-radius: 0 0 20px 20px;
+}
+
+.glass:after {
+  content: '';
+  position: absolute;
+  top: 9%;
+  left: 100%;
+  height: 43%;
+  width: 30%;
+  background-color: transparent;
+  border-radius: 0 20px 20px 0;
+  border: 15px solid white;
+  border-left: none;
+}
+
+@media (max-width: 768px) {
+  .glass:after {
+    top: 10%;
+    border-radius: 0 20px 20px 0;
+    border: 5px solid white;
+    border-left: none;
+  }
+}
+
+
+.beer {
+  position: relative;
+  background-color: var(--beer-color);
+  width: 100%;
+  position: absolute;
+  bottom: 10%;
+  height: 0;
+}
+
+.full .beer {
+  height: var(--beer-height);
+  animation: none;
+}
+
+
+.filling .beer {
+  animation-name: filling;
+  animation-duration: var(--animation-duration);
+  animation-timing-function: ease-in-out;
+  /* animation-delay: var(--animation-delay); */
+  animation-play-state: running;
+  animation-iteration-count: infinite;
+}
+
+@media (max-width: 768px) {
+  .filling .beer {
+    animation-name: filling;
+  }
+}
+
+.beer:after {
+  content: '';
+  position: absolute;
+  right: 0;
+  height: 100%;
+  width: 20%;
+  background-color: var(--another-beer-color);
+}
+
+
+.foam {
+  position: absolute;
+  display: inline-block;
+  background-color: white;
+}
+
+.foam-0 {
+  top: -20%;
+  width: 100%;
+  height: 20%;
+}
+
+.foam-1 {
+  top: -40%;
+  width: 30%;
+  border-radius: 80% 30%;
+  height: 30%;
+}
+.foam-2{
+  top: -45%;
+  left: 25%;
+  width: 45%;
+  border-radius: 45%;
+  height: 45%;
+}
+.foam-3{
+  top: -40%;
+  left: 65%;
+  width: 30%;
+  border-radius: 45%;
+  height: 40%;
+}
+.foam-4{
+  top: -35%;
+  left: 80%;
+  width: 15%;
+  border-radius: 45%;
+  height: 35%;
+  transform: rotate(30deg);
+}
+
+.foam-5 {
+  top: -10px;
+  left: 10%;
+  width: 15%;
+  height: 40%;
+  border-radius: 50px;
+}
+
+.bubble {
+  position: absolute;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.bubble-0 {
+  animation: bubble-0 var(--animation-duration) ease-in-out var(--bubble-animation-delay) infinite;
+  left: 30%;
+}
+
+@keyframes bubble-0 {
+  from {
+    top: 100%;
+    height: 5px;
+    width: 5px;
+  }
+  50% {
+    height: 5px;
+    width: 5px;
+  }
+  to {
+    left: 30%;
+    top: 10%;
+    height: 0;
+    width: 0;
+  }
+}
+.bubble-1 {
+  animation: bubble-1 var(--animation-duration) ease-in-out var(--bubble-animation-delay) infinite;
+  left: 40%;
+  height: 3px;
+  width: 3px;
+}
+
+@keyframes bubble-1 {
+  from {
+    top: 100%;
+  }
+  to {
+    top: 10%;
+    height: 0;
+    width: 0;
+  }
+}
+.bubble-2 {
+  animation: bubble-2 var(--animation-duration) ease-in-out var(--bubble-animation-delay) infinite;
+  left: 50%;
+  height: 7px;
+  width: 7px;
+}
+
+@keyframes bubble-2 {
+  from {
+    top: 100%;
+  }
+  20% {
+    top: 100%;
+  }
+  50% {
+    left: 50%;
+    height: 7px;
+    width: 7px;
+  }
+  to {
+    left: 70%;
+    top: 10%;
+    height: 0;
+    width: 0;
+  }
+}
+.bubble-3 {
+  animation: bubble-3 var(--animation-duration) ease-in-out var(--bubble-animation-delay) infinite;
+  left: 60%;
+  height: 5px;
+  width: 5px;
+}
+
+@keyframes bubble-3 {
+  from {
+    top: 100%;
+  }
+  30% {
+    top: 100%;
+  }
+  50% {
+    left: 60%;
+    height: 5px;
+    width: 5px;
+  }
+  to {
+    left: 75%;
+    top: 20%;
+    height: 0;
+    width: 0;
+  }
+}
+
+
+.barrel {
+  position: absolute;
+  bottom: 90%;
+  left: var(--barrel-left-offset);
+  width: calc(100% - var(--barrel-left-offset));
+  height: var(--barrel-height);
+  background-color: var(--barrel-bg);
+  border-bottom: 2px solid var(--dark-blue);
+}
+
+@media (max-width: 768px) {
+  .barrel {
+    height: calc(var(--barrel-height) * 2/3);
+  }
+}
+
+.segment {
+  height: 100%;
+  position: absolute;
+}
+
+.segment-0, .segment-1, .segment-2,.segment-3 {
+  border-right: 15px solid var(--dark-blue);
+  border-radius: 50%;
+  width: var(--segment-widht);
+}
+
+.segment-1:after, .segment-2:after,.segment-3:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-right: 2px solid var(--light-blue);
+  border-radius: 90%;
+  right: -45px;
+}
+
+.segment-0 {
+  background-color: var(--light-blue);
+  left: calc(0% - var(--segment-widht)/2);
+  border-left: 15px solid var(--blue);
+}
+.segment-1 {
+  left: 8%;
+}
+.segment-2 {
+  left: 40%;
+}
+.segment-3 {
+  left: 70%;
+}
+
+.segment-4, .segment-5, .segment-6, .segment-7, .segment-8, .segment-9 {
+  width: 100%;
+  height: 1px;
+  background-color: var(--light-blue);;
+}
+
+.segment-4 {
+  top: 10%;
+  left: 50px;
+}
+.segment-5 {
+  top: 25%;
+  left: 75px;
+}
+.segment-6 {
+  top: 43%;
+  left: 86px;
+}
+.segment-7 {
+  top: 60%;
+  left: 84px;
+}
+.segment-8 {
+  top: 75%;
+  left: 75px;
+}
+.segment-9 {
+  top: 90%;
+  left: 50px;
+}
+
+.circle {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 15px;
+  height: 15px;
+  background-color: var(--light-blue);
+  border-radius: 50%;
+}
+.circle-1 {
+  transform: rotate(-80deg) translate(145px);
+}
+.circle-2 {
+  transform: rotate(-60deg) translate(80px);
+}
+.circle-3 {
+  transform: rotate(0deg) translate(40px);
+}
+.circle-4 {
+  transform: rotate(60deg) translate(80px);
+}
+.circle-5 {
+  transform: rotate(80deg) translate(135px);
+}
+.circle-6 {
+  transform: rotate(-90deg) translate(195px);
+}
+
+@media (max-width: 768px) {
+  .circle {
+    width: 10px;
+    height: 10px;
+  }
+  .circle-1 {
+    transform: rotate(-80deg) translate(75px);
+  }
+  .circle-2 {
+    transform: rotate(-60deg) translate(45px);
+  }
+  .circle-3 {
+    transform: rotate(0deg) translate(25px);
+  }
+  .circle-4 {
+    transform: rotate(60deg) translate(40px);
+  }
+  .circle-5 {
+    transform: rotate(80deg) translate(65px);
+  }
+  .circle-6 {
+    transform: rotate(-90deg) translate(100px);
+  }
+}
+
+.crane {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.crane .part {
+  position: absolute;
+  background-color: var(--table-color);
+}
+
+.crane .part-1 {
+  top: calc(50% - 18px/2);
+  left: calc(50% - 70px/2);
+  width: 70px;
+  height: 18px;
+}
+.crane .part-2 {
+  top: calc(50% - 18px/2);
+  left: calc(50% - 70px/2);
+  width: 18px;
+  height: 40px;
+}
+
+.crane .part-3 {
+  top: calc(50% - 18px/2 - 15px);
+  left: calc(50% - 20px/2);
+  width: 20px;
+  height: 15px;
+}
+
+.handle {
+  position: absolute;
+  top: calc(50% - 18px/2 - 30px);
+  left: calc(50% - 17px/2 + 15px/2);
+  width: 5px;
+  height: 15px;
+  background-color: white;
+}
+
+.handle:before, .handle:after {
+  content: '';
+  position: absolute;
+  width: var(--handle-width);
+  height: 8px;
+  border-radius: 30%;
+  background-color: var(--table-color);
+  top: calc(0% - 8px/2);
+}
+.handle:after {
+  animation: handle-1 var(--animation-duration) ease-in-out var(--flow-animation-delay) infinite;
+  left: calc(5px/2);
+}
+.handle:before {
+  animation: handle-2 var(--animation-duration) ease-in-out var(--flow-animation-delay) infinite;
+  left: calc(0px - 20px + 8px/2);
+}
+
+.flow {
+  position: absolute;
+  top: calc(50% - 15px/2);
+  left: calc(50% - 70px/2 + 2px);
+  width: var(--flow-width);
+  /* height: 10px; */
+  background-color: var(--beer-color);
+  border-radius: 30px;;
+  animation: flow var(--animation-duration) ease-in-out var(--flow-animation-delay) infinite;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --flow-heigth: 300px;
+  }
+}
+
+@keyframes flow {
+  from {
+    height: 0;
+  }
+  20% {
+    height: var(--flow-height);
+  }
+  45% {
+    height: var(--flow-height);
+    width: var(--flow-width);
+  }
+  50% {
+    width: 0;
+  }
+  to {
+    width: 0;
+  }
+}
+
+@keyframes handle-2 {
+  from {
+    translate: none;
+  }
+  20% {
+    transform: translateX(calc(var(--handle-width)));
+  }
+  30%{
+    transform: translateX(calc(var(--handle-width)));
+  }
+  50% {
+    transform: none;
+  }
+}
+@keyframes handle-1 {
+  from {
+    translate: none;
+  }
+  20% {
+    transform: translateX(calc(0px - var(--handle-width)));
+  }
+  30%{
+    transform: translateX(calc(0px - var(--handle-width)));
+  }
+  50% {
+    transform: none;
+  }
+}
+
+@keyframes mugs_slider {
+  from {
+    margin-left: 0;
+  }
+  50% {
+    margin-left: -33vw;
+  }
+  to {
+    margin-left: -33vw;
+  }
+}
+
+@keyframes filling {
+  from {
+    height: 0;
+  }
+  50% {
+    height: 0;
+  }
+  to {
+    height: var(--beer-height);
+  }
+}
