@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   get "dashboard", to: "pages#dashboard" # route du dashboard
+  get "loading", to: "pages#loading" # route du loading
   get "events/:id/invite", to: "events#invite", as: :invite # page d'invitation
   get "events/:event_id/bars", to: "bars#index", as: :bars
   get "events/:event_id/event_users/barocentre", to: "event_users#barocentre", as: :barocentre  # page de la map avec barocentre
