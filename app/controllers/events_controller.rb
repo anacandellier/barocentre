@@ -39,13 +39,12 @@ class EventsController < ApplicationController
     @event = Event.find(params[:event_id])
     @bar = @event.selected_bar
     redirect_to :back, notice: "Il y a eu une erreur, veuillez recommencer" if @bar.nil?
-    @event_users = @event.event_users
     @markers = [{
       lat: @bar.latitude,
       lng: @bar.longitude,
       marker_html: render_to_string(partial: "marker")
     }]
-
+    @event_user = EventUser.where(user: current_user, event: @event).first
   end
 
   def show
