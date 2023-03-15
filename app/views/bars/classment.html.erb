@@ -28,13 +28,6 @@
                         <p><%= bar.address %></p>
 
                        <div class="d-flex flex-row align-items-center">
-                        <div class="me-2">
-                            <% if bar.votes.count <= 1 %>
-                            <p><strong><%= bar.votes.count %> Vote</strong></p>
-                            <% else %>
-                              <p><strong><%= bar.votes.count %> Votes</strong></p>
-                            <% end %>
-                        </div>
                           <div>
                           <% if bar.votes.count <= 5 %>
                             <% bar.votes.each do |vote|  %>
@@ -44,6 +37,13 @@
                                     {:fetch_format=>"auto"}]) %>
                               <% end %>
                           <% end %>
+                          </div>
+                          <div class="me-2">
+                            <% if bar.votes.count <= 1 %>
+                              <p class="ms-1">(<%= bar.votes.count %> vote)</p>
+                            <% else %>
+                              <p class="ms-1">(<%= bar.votes.count %> votes)</p>
+                            <% end %>
                           </div>
                         </div>
                         <p><%= bar.rating %> <i class="fa-solid fa-star"></i></p>
