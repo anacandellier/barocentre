@@ -6,18 +6,13 @@
       <% else %>
         <%= image_tag "https://as1.ftcdn.net/v2/jpg/03/53/11/00/1000_F_353110097_nbpmfn9iHlxef4EDIhXB1tdTD0lcWhG9.jpg", class: "rounded-circle", style: " width: 250px"%>
       <% end %>
-    <h1 class="align-items-center text-center mt-5">
-      Invite les copains à
-      <span class="fst-italic">
+    <h2 class="align-items-center text-center mt-5">
+      <span class="fs-1" style="color: #001D3D; font-size: 30px !important">
         <br><%= @event.name.capitalize %>
       </span>
-    </h1>
+    </h2>
 
-    <div class="emoji-container">
-      <% 2.times do  %>
-          <div class="emoji" style="top: <%= rand(0..90) %>vh; left: <%= rand(0..95) %>vw;"> <h1>🍻</h1></div>
-      <%end %>
-    </div>
+
 
 
       <div class ="mt-5">
@@ -25,7 +20,7 @@
             data-action="click->share#share"
             data-share-title-value="<%= @event.name %>"
             data-share-url-value="<%= new_event_event_user_url(@event) %>">
-          Partager le lien <i class="fa-solid fa-share-from-square"></i>
+          Inviter les copains <i class="fa-solid fa-share-from-square"></i>
         </span>
         <br>
         <br>
