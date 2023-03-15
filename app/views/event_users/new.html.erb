@@ -17,7 +17,7 @@
                           }
                         } do |f| %>
       <%= f.input :user_address,
-                  label: "Adresse :",
+                  label: false,
                   placeholder: "68 avenue Parmentier",
                   input_html: {
                     class: 'd-none',
@@ -30,10 +30,10 @@
                       address_autocomplete_target: 'wrapper'
                     }
                   } %>
-    
+
       <%= f.input :latitude, as: :hidden, input_html: { data: { address_autocomplete_target: 'latitude' } } %>
       <%= f.input :longitude, as: :hidden, input_html: { data: { address_autocomplete_target: 'longitude' } } %>
-      <%= f.input :transport, label: "Moyen de transport :", as: :radio_buttons,
+      <%= f.input :transport, legend_tag: false, as: :radio_buttons,
             collection_wrapper_tag: 'div',
             collection_wrapper_class: 'category-wrapper',
             item_wrapper_class: 'category-item',
