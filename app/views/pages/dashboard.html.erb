@@ -39,15 +39,20 @@
                 <%else%>
                   <%= event.user.username %>
                 <%end%></h2>
-            <p style="font-size: 9px"><strong><i class="fa-sharp fa-solid fa-calendar-days"></i> <%= event.date.strftime("%A %-d %B %Y à %k:%M") %></strong></p>
+            <p style="font-size: 9px"><strong><i class="fa-sharp fa-solid fa-calendar-days"></i> <%= I18n.l(event.date).capitalize %></strong></p>
             <p style="font-size: 9px"><strong><i class="fa-solid fa-user-group"></i> <%= event.event_users.count %>
               <% if event.event_users.count == 1 %>
                 <%="invité"%>
               <% else %>
                 <%="invités"%>
               <% end %>
-                </strong></p>
-             <p style="font-size: 9px"><strong><i class="fa-solid fa-user-group"></i> <%= translate(event.status) %></strong></p>
+                </strong> <strong><i class="fa-solid fa-user-group"></i> <%= translate(event.status) %></strong> </p>
+             <p style="font-size: 9px">
+             <%# <% if event.status == 2 %>
+            <%# #  && EventUser.where(user: current_user, event: event).first.votes.present? %>
+                <%# <%= "A voté" %>
+              <%# <% end %>
+            </p>
           </div>
         </div>
       <% end %>
