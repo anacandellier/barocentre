@@ -2,10 +2,12 @@
   <div class="mt-5">
 
     <div class="d-flex flex-column justify-content-center">
-      <h1 class="text-center" style="color: #001D3D">Je participe à cet événement</h1>
-      <h2 class="text-center fw-bold" style="color: #1EDD88"><%= @event.name %></h2>
+      <h1 class="text-center" style="color: #001D3D">Je participe à </h1>
+      <h2 class="text-center fw-bold" style="color: #FFC300"><%= @event.name %></h2>
       <p class="text-center fw-light" style="color: #001D3D"><%= I18n.l(@event.date).capitalize %></p>
     </div>
+
+    <br>
 
     <%= simple_form_for [@event, @event_user],
                         html: {
@@ -28,7 +30,7 @@
                       address_autocomplete_target: 'wrapper'
                     }
                   } %>
-
+    
       <%= f.input :latitude, as: :hidden, input_html: { data: { address_autocomplete_target: 'latitude' } } %>
       <%= f.input :longitude, as: :hidden, input_html: { data: { address_autocomplete_target: 'longitude' } } %>
       <%= f.input :transport, label: "Moyen de transport :", as: :radio_buttons,
@@ -41,6 +43,7 @@
               content_tag('span') { " "
               }
             } %>
+      <br>
             <div class="d-flex justify-content-end">
               <%= f.submit "Je participe !", class: "btn btn-ghost me-3 mb-3"%>
             </div>

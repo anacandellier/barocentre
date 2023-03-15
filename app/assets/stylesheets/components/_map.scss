@@ -5,5 +5,11 @@
 .mapboxgl-popup-content {
   text-align: center;
   font-family: "Open Sans", sans-serif;
-  
+
+}
+
+.baro-map {
+  width: 100%;
+  height: $container-height;
+  border-radius: 15px
 }
