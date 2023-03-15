@@ -9,9 +9,18 @@ class EventUser < ApplicationRecord
   geocoded_by :user_address
   after_validation :geocode, unless: :lon_lat_changed?
 
+  def transport_icon
+    {
+      'bicycling' => '<i class="fa-solid fa-person-biking"></i>',
+      'transit' => '<i class="fa-solid fa-train-subway"></i>',
+      'driving' => '<i class="fa-solid fa-car"></i>'
+    }[transport].html_safe
+  end
+
   private
 
   def lon_lat_changed?
     longitude_changed? && latitude_changed?
   end
+
 end

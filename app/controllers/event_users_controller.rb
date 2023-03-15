@@ -34,6 +34,13 @@ class EventUsersController < ApplicationController
     @event.open!
   end
 
+  def destroy
+    @event_user = EventUser.find(params[:id])
+    @event = @event_user.event
+    @event_user.destroy
+    redirect_to event_event_users_path(@event), status: :see_other
+  end
+
   def map
     @event = Event.find(params[:event_id])
     @eventusers = @event.event_users

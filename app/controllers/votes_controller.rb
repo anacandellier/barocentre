@@ -2,6 +2,7 @@ class VotesController < ApplicationController
 
   def create
     @event = Event.find(params[:event_id])
+    @bars = @event.bars
     @user = @event.event_users.find_by(user: current_user)
     @previous_votes = Vote.where(event_user: @user)
     @previous_votes.destroy_all
@@ -11,7 +12,8 @@ class VotesController < ApplicationController
     if @vote.save
       redirect_to event_classment_path(@event)
     else
-      render "bars/index"
+      flash.now[:alert] = 'Vous ne participez pas à l\'évènement'
+      render "bars/index", status: :unprocessable_entity
     end
   end
 end
