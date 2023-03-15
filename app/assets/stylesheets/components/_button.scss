@@ -90,12 +90,25 @@
 }
 
 .btn-minishare {
-  
   color: #ffffff;
   width: fit-content;
-  padding: 6px 22px;
+  // padding: 6px 22px;
+  // border-radius: 50px;
+  font-weight: lighter;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.btn-bar {
+  background-color:$orange;
+  color: #ffffff;
+  padding: 4px 18px;
   border-radius: 50px;
   font-weight: lighter;
   text-decoration: none;
   transition: background 0.3s ease;
+}
+
+.btn-bar:hover {
+  opacity: 0.2;
 }

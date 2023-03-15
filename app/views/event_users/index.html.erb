@@ -3,47 +3,55 @@
   <div class="justify-content-center">
     <div class="col-sm-3 col-lg-12 ps-5 pe-5 pt-3 pb-2">
       <div class="text-center border-bottom border-secondary mt-2">
-        <p class="border-bottom border-secondary pb-2">L'événement <strong><%= @event.name %></strong> est organisé par : <strong><%= @event.user.username %></strong></p>
-        <h1>VOICI LES COPAINS <i class="fa-solid fa-user-group"></i> </h1>
-          <div class="d-flex justify-content-center mb-3 btn-wrapper">
-          <% if current_user == @event.user %>
-            <%= link_to "Trouver le bar", barocentre_path, class: "btn btn-ghost" %>
-                  <div class="btn-minishare" data-controller="share"
-                        data-action="click->share#share"
-                        data-share-title-value="<% @event.name %>"
-                        data-share-url-value="<% new_event_event_user_url(@event) %>">
-                        <%= image_tag "share.png", style:"width:20px" %>
-                  </div>
-          <% end %>
+        <h1><%= @event.name.capitalize %></h1>
+        <p class="border-bottom border-secondary pb-2">
+          <i class="fa-solid fa-crown"></i> <strong><%= @event.user.username %></strong>
+        </p>
 
-          </div>
+        <div class="d-flex justify-content-center mb-3 btn-wrapper">
+          <% if current_user == @event.user %>
+            <%= link_to "Trouver le bar", barocentre_path, class: "btn btn-bar" %>
+          <% end %>
+        </div>
+        <div class="d-flex justify-content-center mb-3 btn-wrapper">
+          <span class="me-3" onclick="window.location.reload()">
+            <i class="fa-solid fa-rotate-right"></i>
+          </span>
+          <span class="btn-minishare ms-3" data-controller="share"
+                data-action="click->share#share"
+                data-share-title-value="<%= @event.name %>"
+                data-share-url-value="<%= new_event_event_user_url(@event) %>">
+                <i class="fa-solid fa-share-from-square text-black"></i>
+          </span>
+        </div>
       </div>
       <div class="row d-flex ms-1 me-1 justify-content-center">
-          <% @eventusers.each do |element| %>
-              <div class="col-sm-3 col-lg-4 mb-2">
-                <div class="d-flex flex-row justify-content-start align-items-center m-3">
-                  <div>
-                    <% if element.user.photo.attached? %>
-                      <%= image_tag element.user.photo, class: "dash-avatar me-3" %>
-                    <% else %>
-                      <%= image_tag "https://as1.ftcdn.net/v2/jpg/03/53/11/00/1000_F_353110097_nbpmfn9iHlxef4EDIhXB1tdTD0lcWhG9.jpg", class: "rounded-circle me-3", style: "width: 100px" %>
-                    <% end %>
-                  </div>
+        <% @eventusers.each do |element| %>
+          <div class="col-sm-3 col-lg-4 mb-2">
+            <div class="d-flex flex-row justify-content-start align-items-center m-3">
+              <% if element.user.photo.attached? %>
+                <%= image_tag element.user.photo, class: "dash-avatar me-3" %>
+              <% else %>
+                <%= image_tag "https://as1.ftcdn.net/v2/jpg/03/53/11/00/1000_F_353110097_nbpmfn9iHlxef4EDIhXB1tdTD0lcWhG9.jpg", class: "rounded-circle me-3", style: "width: 100px" %>
+              <% end %>
 
-                  <div>
-                    <p class="mt-3" style="font-size: 13px"><strong><%= element.user.username.capitalize %></strong><br><%= element.user_address %><br>
-                    <%= translate(element.transport) %></p>
-                  </div>
-                </div>
-              </div>
-          <% end %>
+              <p class="mt-3" style="font-size: 13px">
+                <strong><%= element.user.username.capitalize %></strong>
+                <br>
+                <%= element.user_address %>
+                <br>
+                <%= translate(element.transport) %>
+              </p>
+            </div>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
   <div class="col-sm-3 col-lg-12 d-flex justify-content-center">
-      <%= link_to map_event_users_path, class: "btn btn-ghost", style: "border: 1px solid black; color: black; border-radius: 20Px; position : fixed; bottom : 50px;" do %>
-        CARTE <i class="fa-solid fa-map"></i>
-      <% end %>
+    <%= link_to map_event_users_path, class: "btn btn-ghost", style: "border: 1px solid black; border-radius: 20Px; position : fixed; bottom : 50px;" do %>
+      CARTE <i class="fa-solid fa-map"></i>
+    <% end %>
   </div>
 </div>
 
