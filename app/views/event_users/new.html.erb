@@ -1,8 +1,11 @@
 <div class="container vh-100">
   <div class="mt-5">
-    <h1>Je participe à cet événement</h1>
-    <h2><%= @event.name %></h2>
-    <p><%= I18n.l(@event.date).capitalize %></p>
+
+    <div class="d-flex flex-column justify-content-center">
+      <h1 class="text-center" style="color: #001D3D">Je participe à cet événement</h1>
+      <h2 class="text-center fw-bold" style="color: #1EDD88"><%= @event.name %></h2>
+      <p class="text-center fw-light" style="color: #001D3D"><%= I18n.l(@event.date).capitalize %></p>
+    </div>
 
     <%= simple_form_for [@event, @event_user],
                         html: {
@@ -12,7 +15,7 @@
                           }
                         } do |f| %>
       <%= f.input :user_address,
-                  label: "Je pars de...",
+                  label: "Adresse :",
                   placeholder: "68 avenue Parmentier",
                   input_html: {
                     class: 'd-none',
@@ -28,7 +31,7 @@
 
       <%= f.input :latitude, as: :hidden, input_html: { data: { address_autocomplete_target: 'latitude' } } %>
       <%= f.input :longitude, as: :hidden, input_html: { data: { address_autocomplete_target: 'longitude' } } %>
-      <%= f.input :transport, label: "en", as: :radio_buttons,
+      <%= f.input :transport, label: "Moyen de transport :", as: :radio_buttons,
             collection_wrapper_tag: 'div',
             collection_wrapper_class: 'category-wrapper',
             item_wrapper_class: 'category-item',
@@ -38,7 +41,9 @@
               content_tag('span') { " "
               }
             } %>
-      <%= f.submit "Je participe !", class: "btn btn-primary me-3 mb-3"%>
+            <div class="d-flex justify-content-end">
+              <%= f.submit "Je participe !", class: "btn btn-ghost me-3 mb-3"%>
+            </div>
     <% end %>
   </div>
 
