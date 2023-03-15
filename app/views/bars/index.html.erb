@@ -2,8 +2,11 @@
   <div class="justify-content-center">
     <div class="col-sm-3 col-lg-12 p-4">
       <div class="text-center border-bottom mt-2">
-        <p class="border-bottom pb-2">L'événement <strong><%= @event.name %></strong> est organisé par : <strong><%= @event.user.username %></strong></p>
-        <h1>LISTE DES BARS <i class="fa-solid fa-beer-mug-empty"></i></h1>
+        <h1><%= @event.name.capitalize %></h1>
+        <p class="border-bottom border-secondary pb-2">
+          <i class="fa-solid fa-crown"></i> <strong><%= @event.user.username %></strong>
+        </p>
+        <h1>BARS</h1>
       </div>
       <div class="row justify-content-center p-2">
         <% @bars.each do |bar| %>
@@ -15,14 +18,14 @@
                 <p><%= bar.address %></p>
                 <p><%= bar.rating %> <i class="fa-solid fa-star"></i></p>
               </div>
-              <%= link_to "VOTE", event_votes_path(@event, bar: bar), data: { turbo_method: :post }, class: "btn btn-ghost btn-sm", style: "background: #6d5938" %>
+              <%= link_to "VOTE", event_votes_path(@event, bar: bar), data: { turbo_method: :post }, class: "btn btn-ghost btn-sm" %>
             </div>
           </div>
         <% end %>
       </div>
     </div>
     <div class="col-sm-3 col-lg-12 d-flex justify-content-center">
-      <%= link_to map_path, class: "btn btn-ghost", style: "border: 1px solid black; color: black; border-radius: 20Px; position : fixed; bottom : 30px;" do %>
+      <%= link_to map_path, class: "btn btn-ghost", style: "border: 1px solid black; border-radius: 20Px; position : fixed; bottom : 30px;" do %>
         CARTE <i class="fa-solid fa-map"></i>
       <% end %>
     </div>

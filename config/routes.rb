@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   get "loading", to: "pages#loading" # route du loading
   get "events/:id/invite", to: "events#invite", as: :invite # page d'invitation
   get "events/:event_id/bars", to: "bars#index", as: :bars
-  get "events/:event_id/event_users/barocentre", to: "event_users#barocentre", as: :barocentre  # page de la map avec barocentre
+  post "events/:event_id/bars", to: "bars#create_bars", as: :create_bars
+  get "events/:id/barocentre", to: "events#barocentre", as: :barocentre  # page de la map avec barocentre
   get "events/:event_id/bars/map", to: "bars#map", as: :map # page de la map avec les bars
   get "events/:event_id/event_users/map", to: "event_users#map", as: :map_event_users # page de la map avec les event_users
   resources :events, only: [:new, :create, :show] do # route du new, show, create event

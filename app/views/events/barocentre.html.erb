@@ -6,5 +6,5 @@
         data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
   </div>
 
-  <%= link_to "Voir les bars", bars_path, class: "btn btn-ghost", style: "position: fixed; bottom: 30px; left: 120px" %>
+  <%= link_to "Voir les bars", bars_path(@event), class: "btn btn-ghost", style: "position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);" %>
 </div>

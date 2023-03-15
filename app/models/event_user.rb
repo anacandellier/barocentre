@@ -20,6 +20,7 @@ class EventUser < ApplicationRecord
   private
 
   def lon_lat_changed?
+    puts "\n\n\n\n\n\n\nPROUT\n\n\n\n"
     longitude_changed? && latitude_changed?
   end
 
