@@ -1,10 +1,11 @@
-<div class="container vh-100">
-  <div class="mt-5">
+<div class="container custom-container">
+  <div class="pt-5">
 
     <div class="d-flex flex-column justify-content-center">
-      <h1 class="text-center" style="color: #001D3D">Je participe à </h1>
-      <h2 class="text-center fw-bold" style="color: #FFC300"><%= @event.name %></h2>
-      <p class="text-center fw-light" style="color: #001D3D"><%= I18n.l(@event.date).capitalize %></p>
+
+      <h1 class="text-center fw-bold" style="color: #FFC300"><%= @event.name.capitalize %></h1>
+
+      <p class="text-center fw-light" style="color: #001D3D"><i class="fa-regular fa-calendar"></i> <%= I18n.l(@event.date).capitalize %></p>
     </div>
 
     <br>
@@ -49,5 +50,5 @@
             </div>
     <% end %>
   </div>
-
 </div>
+<%= render 'shared/footer' %>

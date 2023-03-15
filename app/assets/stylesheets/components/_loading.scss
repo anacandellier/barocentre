@@ -52,6 +52,10 @@
   touch-action: none;
 }
 
+.custom-container {
+  min-height: $container-height;
+}
+
 .wall {
   background-color: var(--wall-color);
   height: 70vh;

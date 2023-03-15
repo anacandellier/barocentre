@@ -1,0 +1,16 @@
+.wavy-rectangle {
+  height: $footer-height;
+  // background-color: $yellow;
+  position: relative;
+  // display: inline-block;
+  // width: 100%;
+  vertical-align: middle;
+  overflow: hidden;
+  svg {
+    display: inline-block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transform: rotate(180deg);
+  }
+}

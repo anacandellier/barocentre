@@ -1,45 +1,58 @@
-<% if current_user == @event.user %>
-  <div class="container flex-column square-box d-flex justify-content-center align-items-center mt-5">
-    <% if current_user.photo.attached? %>
-      <%= cl_image_tag current_user.photo.key, :width=>100, :height=>100, :radius=>"max", :crop=>"fill", class: "rounded-circle" %>
-    <% else %>
-      <%= image_tag "https://as1.ftcdn.net/v2/jpg/03/53/11/00/1000_F_353110097_nbpmfn9iHlxef4EDIhXB1tdTD0lcWhG9.jpg", class: "rounded-circle", style: " width: 250px"%>
-    <% end %>
-   <h1 class="align-items-center text-center mt-5">
-    Invite les copains à
-    <span class="fst-italic">
-      <br><%= @event.name.capitalize %>
-    </span>
-   </h1>
-
-    <div class ="mt-5">
-      <span class="share-btn" data-controller="share"
-          data-action="click->share#share"
-          data-share-title-value="<%= @event.name %>"
-          data-share-url-value="<%= new_event_event_user_url(@event) %>">
-        Partager le lien <i class="fa-solid fa-share-from-square"></i>
+<div class="custom-container">
+  <% if current_user == @event.user %>
+    <div class="container flex-column square-box d-flex justify-content-center align-items-center pt-5">
+      <% if current_user.photo.attached? %>
+        <%= cl_image_tag current_user.photo.key, :width=>100, :height=>100, :radius=>"max", :crop=>"fill", class: "rounded-circle" %>
+      <% else %>
+        <%= image_tag "https://as1.ftcdn.net/v2/jpg/03/53/11/00/1000_F_353110097_nbpmfn9iHlxef4EDIhXB1tdTD0lcWhG9.jpg", class: "rounded-circle", style: " width: 250px"%>
+      <% end %>
+    <h1 class="align-items-center text-center mt-5">
+      Invite les copains à
+      <span class="fst-italic">
+        <br><%= @event.name.capitalize %>
       </span>
+    </h1>
+
+    <div class="emoji-container">
+      <% 2.times do  %>
+          <div class="emoji" style="top: <%= rand(0..90) %>vh; left: <%= rand(0..95) %>vw;"> <h1>🍻</h1></div>
+      <%end %>
     </div>
-    <% unless current_user && current_user.participates_to_event?(@event) %>
+
+
       <div class ="mt-5">
-        <%= link_to root_path, class: "btn-secondary m-1" do %>
-          <i class="fa-solid fa-arrow-left"></i>
-        <% end%>
-        <%= link_to "Donner mes infos", new_event_event_user_path(@event), class: "btn-ghost m-1" %>
-
+        <span class="share-btn" data-controller="share"
+            data-action="click->share#share"
+            data-share-title-value="<%= @event.name %>"
+            data-share-url-value="<%= new_event_event_user_url(@event) %>">
+          Partager le lien <i class="fa-solid fa-share-from-square"></i>
+        </span>
+        <br>
+        <br>
       </div>
-    <% else %>
-      <div class ="m-1">
-        <%= link_to "Continuer", event_event_users_path(@event), class: "btn-ghost" %>
-        <%= link_to "back", root_path, class: "btn-secondary" %>
-      </div>
-    <% end %>
-  </div>
+      <% unless current_user && current_user.participates_to_event?(@event) %>
+        <div class ="mt-5">
+          <%= link_to root_path, class: "btn-secondary m-1" do %>
+            <i class="fa-solid fa-arrow-left"></i>
+          <% end%>
+          <%= link_to "Donner mes infos", new_event_event_user_path(@event), class: "btn-ghost m-1" %>
+
+        </div>
+      <% else %>
+        <div class ="m-1">
+          <%= link_to "Continuer", event_event_users_path(@event), class: "btn-ghost" %>
+          <%= link_to "back", root_path, class: "btn-secondary" %>
+        </div>
+      <% end %>
+    </div>
 
 
 
-<% else %>
-  <div class="container hauteur flex-column square-box d-flex justify-content-center align-items-center">
-    <h1>ACCESS DENY</h1>
-  </div>
-<% end %>
+  <% else %>
+    <div class="container hauteur flex-column square-box d-flex justify-content-center align-items-center">
+      <h1>ACCESS DENY</h1>
+    </div>
+  <% end %>
+</div>
+
+<%= render 'shared/footer' %>
