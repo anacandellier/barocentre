@@ -27,4 +27,8 @@ class ApplicationController < ActionController::Base
   def store_user_location!
     store_location_for(:user, request.fullpath)
   end
+
+  def default_url_options
+    { host: ENV["DOMAIN"] || "localhost:3000" }
+  end
 end
