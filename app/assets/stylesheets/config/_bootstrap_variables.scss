@@ -25,4 +25,4 @@ $border-radius-sm: 2px;
 
 // Override other variables below!
 $navbar-height: 5rem;
-$container-height: calc(100vh - $navbar-height);
+$container-height: calc(100vh - #{$navbar-height});

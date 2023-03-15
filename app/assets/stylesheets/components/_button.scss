@@ -57,14 +57,14 @@
   opacity: 0;
   width: 0;
   height: 0;
-  transition: opacity ease 0.6s;
+  transition: opacity ease 0.3s;
   border: none;
 
   &.active {
     opacity: 1;
     width: 20%;
     height: fit-content;
-    color: white;
+    color: $orange;
     border: none;
   }
 }

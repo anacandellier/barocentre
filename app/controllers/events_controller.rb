@@ -55,6 +55,24 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
   end
 
+  def barocentre
+    @event = Event.find(params[:id])
+    @eventusers = @event.event_users
+    @markers = @eventusers.geocoded.map do |eventuser|
+      {
+        lat: eventuser.latitude,
+        lng: eventuser.longitude,
+        user_name: eventuser.user.email,
+        info_window_html: render_to_string(partial: "event_users/info_window", locals: {event_user: eventuser} ),
+        marker_html: render_to_string(partial: "event_users/marker", locals: {event_user: eventuser} )
+      }
+    end
+    @barycenter_marker = [{
+      lat: @event.barycenter_lat,
+      lng: @event.barycenter_lng,
+      marker_html: render_to_string(partial: "event_users/marker", locals: {event_user: @event}),
+    }]
+  end
 
   private
 
