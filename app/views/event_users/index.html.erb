@@ -25,23 +25,36 @@
           </span>
         </div>
       </div>
-      <div class="row d-flex ms-1 me-1 justify-content-center">
+      <div class="row d-flex justify-content-center pt-2">
         <% @eventusers.each do |element| %>
           <div class="col-sm-3 col-lg-4 mb-2">
-            <div class="d-flex flex-row justify-content-start align-items-center m-3">
+            <div class="d-flex flex-row justify-content-start align-items-center my-1">
               <% if element.user.photo.attached? %>
                 <%= image_tag element.user.photo, class: "dash-avatar me-3" %>
               <% else %>
                 <%= image_tag "https://as1.ftcdn.net/v2/jpg/03/53/11/00/1000_F_353110097_nbpmfn9iHlxef4EDIhXB1tdTD0lcWhG9.jpg", class: "rounded-circle me-3", style: "width: 100px" %>
               <% end %>
-
               <p class="mt-3" style="font-size: 13px">
-                <strong><%= element.user.username.capitalize %></strong>
+                <% if @event.user == element.user %>
+                  <i class="fa-solid fa-crown"></i>
+                <% end %>
+                <strong><%= element.user.username.capitalize %></strong> - <%= element.transport_icon %>
                 <br>
                 <%= element.user_address %>
-                <br>
-                <%= translate(element.transport) %>
               </p>
+
+
+              <% if @event.user == current_user && element.user != current_user %>
+                <div class="ms-2 d-flex justify-content-center align-items-end">
+                  <%= link_to event_user_path(element),
+                              data: {
+                                turbo_method: :delete,
+                                turbo_confirm: "Voulez-vous retirer #{element.user.username.capitalize} de l'évènement #{@event.name}"
+                              } do %>
+                    <i class="fa-regular fa-trash-can"></i>
+                  <% end %>
+                </div>
+              <% end %>
             </div>
           </div>
         <% end %>

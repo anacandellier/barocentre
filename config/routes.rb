@@ -16,4 +16,5 @@ Rails.application.routes.draw do
     resources :votes, only: [:create]
     resources :event_users, only: [:new, :create, :index] # route du new, create, index event_user
   end
+  resources :event_users, only: [:destroy]
 end

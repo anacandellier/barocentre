@@ -3,7 +3,6 @@
   data-map-markers-value="<%= @markers.to_json %>"
   data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
 </div>
-
-  <%= link_to event_event_users_path, class: "btn btn-ghost", style: "border: 1px solid black; border-radius: 20Px; position : fixed; bottom : 30px; left: 90px" do %>
-    LISTE DES INVITES <i class="fa-solid fa-beer-mug-empty"></i>
-  <% end %>
+<%= link_to event_event_users_path, class: "btn btn-ghost", style: "border: 1px solid black; border-radius: 20Px; position : fixed; bottom : 30px; left: 90px" do %>
+  LISTE DES INVITES <i class="fa-solid fa-beer-mug-empty"></i>
+<% end %>
