@@ -26,3 +26,30 @@
   border-radius: 50%;
   object-fit: cover;
 }
+
+ul.crop-avatar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  li {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    -webkit-transition: .2s ease;
+    transition: .2s ease;
+  }
+}
+
+li:nth-child(5) {
+  background: $grayback;
+  p {
+    margin: 4px;
+  }
+}
+li:nth-child(n+2) { margin-left: -10px; }
+
+ul:hover li:nth-child(n+2) {
+   margin-left: -10px;
+}
