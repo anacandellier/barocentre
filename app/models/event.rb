@@ -22,4 +22,10 @@ class Event < ApplicationRecord
     .distinct
   }
 
+  def most_voted_bars
+    bars.group_by do |bar|
+      bar.votes.count
+    end.first.last
+  end
+
 end

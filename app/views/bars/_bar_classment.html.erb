@@ -1,0 +1,36 @@
+<div class="card-product justify-content-between m-2" style="width: 600px ;border-radius: 5px; padding: 0" data-id="<%= bar.id %>">
+  <div class="d-flex align-items-center" style="height:100%">
+  <img src="<%= bar.photo %>" class="bar-img me-2"/>
+    <div class="card-product-infos d-flex justify-content-between">
+      <div>
+        <h2><%= bar.name %></h2>
+        <p><%= bar.address %></p>
+
+      <div class="d-flex flex-row align-items-center">
+          <div>
+          <% if bar.votes.count <= 5 %>
+            <% bar.votes.each do |vote|  %>
+              <%= cl_image_tag(vote.user.photo.key,class: "miniavatar",
+                    :transformation=>[
+                    {:gravity=>"face", :height=>250, :width=>250, :crop=>"crop"},
+                    {:fetch_format=>"auto"}]) %>
+              <% end %>
+          <% end %>
+          </div>
+          <div class="me-2">
+            <% if bar.votes.count <= 1 %>
+              <p class="ms-1">(<%= bar.votes.count %> vote)</p>
+            <% else %>
+              <p class="ms-1">(<%= bar.votes.count %> votes)</p>
+            <% end %>
+          </div>
+        </div>
+        <p><%= bar.rating %> <i class="fa-solid fa-star"></i></p>
+      </div>
+    </div>
+    </div>
+    <%= link_to "Choisir",
+    event_choose_bar_path(event, bar: bar),
+    data: { toggle_elements_target: "element" },
+    class: "btn btn-sm validate-bar-btn "%>
+</div>
