@@ -7,12 +7,6 @@
       <div class="text-center mt-2">
         <div class="d-flex justify-content-center" style="width: 100">
           <h1><%= @event.name.capitalize %></h1>
-          <span class="btn-minishare ms-3" data-controller="share"
-                data-action="click->share#share"
-                data-share-title-value="<%= @event.name %>"
-                data-share-url-value="<%= new_event_event_user_url(@event) %>">
-                <i class="fa-solid fa-share-from-square"></i>
-          </span>
         </div>
 
 
@@ -31,7 +25,15 @@
         </div>
       </div>
         <p class="text-center"><i class="fa-solid fa-crown"></i> <strong><%= @event.user.username %></strong></p>
-       <p class="border-bottom border-secondary text-start pb-1 pt-3" style="font-size: 16px">Participants</p>
+        <div class="d-flex border-bottom border-secondary justify-content-between align-items-center mt-5 mb-3 pb-1">
+          <p class="text-start" style="font-size: 16px; margin: 0px;">Participants</p>
+          <span class="btn-minishare" data-controller="share"
+                data-action="click->share#share"
+                data-share-title-value="<%= @event.name %>"
+                data-share-url-value="<%= new_event_event_user_url(@event) %>">
+                <i class="fa-solid fa-share-from-square"></i>
+          </span>
+        </div>
       <div class="row d-flex justify-content-center pt-2 <%= "owner" if @event.user == current_user %>" data-event-subscription-target="users">
         <% @eventusers.each do |element| %>
           <%= render "event_users/event_user", element: element%>
