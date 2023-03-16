@@ -1,0 +1,5 @@
+<% if event_user.user.photo.attached? %>
+  <%= cl_image_tag event_user.user.photo.key, :width=>50, :height=>50, :radius=>"max", :crop=>"fill", class: "rounded-circle avatar-bordered" %>
+<% else %>
+  <%= image_tag "https://as1.ftcdn.net/v2/jpg/03/53/11/00/1000_F_353110097_nbpmfn9iHlxef4EDIhXB1tdTD0lcWhG9.jpg", class: "rounded-circle", style: " width: 50px"%>
+<% end %>
