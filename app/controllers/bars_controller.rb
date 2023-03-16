@@ -41,6 +41,7 @@ class BarsController < ApplicationController
     @event = Event.find(params[:event_id])
     second_barycenter
     get_bars_from_google(@event)
+    EventChannel.broadcast_to(@event, { url: bars_path(@event), current_user_id: current_user.id })
 
     redirect_to barocentre_path(@event)
   end
