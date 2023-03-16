@@ -10,6 +10,7 @@ class VotesController < ApplicationController
     @vote.event_user = @user
     @vote.bar = Bar.find(params[:bar])
     if @vote.save
+      
       redirect_to event_classment_path(@event)
     else
       flash.now[:alert] = 'Vous ne participez pas à l\'évènement'
