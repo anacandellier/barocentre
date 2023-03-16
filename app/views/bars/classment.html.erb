@@ -1,12 +1,13 @@
 <div class="justify-content-center" data-controller="event-subscription"
       data-event-subscription-event-id-value="<%= @event.id%>">
     <div class="col-sm-3 col-lg-12 p-4">
-      <div class="text-center border-bottom mt-2">
-        <p class="border-bottom pb-2">L'événement <strong><%= @event.name %></strong> est organisé par : <strong><%= @event.user.username %></strong></p>
-        <h1>LE CLASSEMENT </h1>  <span class="me-3" onclick="window.location.reload()">
-        <i class="fa-solid fa-rotate-right"></i>
-      </span>
-      </div>
+      <div class="text-center mt-2">
+      <h1><%= @event.name.capitalize %></h1>
+          <p class="pb-2">
+          <i class="fa-solid fa-crown"></i> <strong><%= @event.user.username %></strong>
+        </p>
+    </div>
+        <p class="border-bottom border-secondary text-left">Participants</p>
     <div class="ranking-wrapper" data-controller="toggle-elements">
       <%# Pour afficher le mot "cloturer le vote, qui va faire apparaitre le bouton choisir" %>
       <% if current_user == @event.user %>

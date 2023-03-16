@@ -41,6 +41,7 @@ class BarsController < ApplicationController
     @event = Event.find(params[:event_id])
     second_barycenter
     get_bars_from_google(@event)
+
     EventChannel.broadcast_to(@event, { url: bars_path(@event), current_user_id: current_user.id })
 
     redirect_to barocentre_path(@event)
@@ -91,7 +92,6 @@ class BarsController < ApplicationController
     @event.update(barycenter_lat: sec_bary_lat)
     @event.update(barycenter_lng: sec_bary_lng)
     # Appeler le calcul du barycentre uniquement à la fin (ou quand un nouvel invité arrive), et on supprime donc la liste des bars
-    @event.bars.destroy_all
   end
 
   def get_bars_from_google(event)
@@ -130,6 +130,7 @@ class BarsController < ApplicationController
       break if counter >= 10
     end
     bars = bars.sort_by(&:rating).reverse.first(5)
+    @event.bars.destroy_all if bars.length > 1
     bars.each(&:save)
   end
 
