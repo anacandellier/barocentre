@@ -1,13 +1,13 @@
 <div class="wraper" style="height: 100%">
   <div class="justify-content-center">
     <div class="col-sm-3 col-lg-12 p-4">
-      <div class="text-center border-bottom mt-2">
+      <div class="text-center  mt-2">
         <h1><%= @event.name.capitalize %></h1>
-        <p class="border-bottom border-secondary pb-2">
+        <p class="pb-2">
           <i class="fa-solid fa-crown"></i> <strong><%= @event.user.username %></strong>
         </p>
-        <h1>BARS</h1>
       </div>
+       <p class="border-bottom border-secondary">Bars</p>
       <div class="row justify-content-center p-2">
         <% @bars.each do |bar| %>
           <div class="col-sm-12 col-lg-3 card-trip m-3" style="width: 400px; border-radius: 5px; padding: 0">
