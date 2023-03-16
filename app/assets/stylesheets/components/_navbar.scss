@@ -1,6 +1,7 @@
 .navbar-lewagon {
   justify-content: space-between;
   background: $darkblue;
+  min-height: $navbar-height;
 }
 
 .navbar-lewagon .navbar-collapse {

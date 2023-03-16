@@ -1,0 +1,46 @@
+.emoji-container {
+  z-index: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+.emoji {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 1.2em;
+  opacity: 0;
+  animation: emoji-float 4s ease-out infinite;
+  pointer-events: none;
+}
+.emoji h1{
+  font-size: 68px;
+}
+@keyframes emoji-float {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0) rotate(0deg);
+  }
+  25% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) rotate(-10deg);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateY(-100%) scale(1) rotate(10deg);
+  }
+  75% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateY(-100%) scale(0) rotate(-10deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0) rotate(0deg);
+  }
+}
