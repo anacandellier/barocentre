@@ -22,5 +22,8 @@ application.register("map", MapController)
 import ShareController from "./share_controller"
 application.register("share", ShareController)
 
+import SweatalertController from "./sweatalert_controller"
+application.register("sweatalert", SweatalertController)
+
 import ToggleElementsController from "./toggle_elements_controller"
 application.register("toggle-elements", ToggleElementsController)
