@@ -7,8 +7,7 @@
   color: $darkblue;
 }
 
-.btn-minishare {
-  position: absolute;
-  bottom: 478px;
-  right: 46px;
+.animate__animated.animate__shakeY {
+  --animate-duration: 5s;
+  --animate-delay: 10s;
 }

@@ -79,6 +79,7 @@
 
 .card-product .card-product-infos {
   padding: 5px;
+  width: 105px;
 }
 
 .trophy {
@@ -93,4 +94,26 @@
   .trophy {
     display: inline-block;
   }
+}
+
+.text-ellipsis--2{
+  text-overflow:ellipsis;
+  overflow:hidden;
+  // Addition lines for 2 line or multiline ellipsis
+  display: -webkit-box !important;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+}
+
+.btn-itinerary {
+  position: fixed;
+  bottom: 30px;
+  right: 20px;
+  background-color: #001D3D;
+  color: #ffffff;
+  padding: 6px 22px;
+  border-radius: 50px;
+  font-weight: lighter;
+  text-decoration: none;
 }
