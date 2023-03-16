@@ -80,3 +80,17 @@
 .card-product .card-product-infos {
   padding: 5px;
 }
+
+.trophy {
+  display: none;
+  top: 0.6rem;
+  right: 0.6rem;
+  position: absolute;
+}
+
+.card-bar-voted {
+  background: $yellow !important;
+  .trophy {
+    display: inline-block;
+  }
+}

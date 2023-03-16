@@ -3,7 +3,7 @@
   <div class="col-sm-3 col-lg-12 p-4">
     <div class="text-center border-bottom mt-2">
       <p class="border-bottom pb-2">L'événement <strong><%= @event.name %></strong> est organisé par : <strong><%= @event.user.username %></strong></p>
-      <h1>LE CLASSEMENT <i class="fa-solid fa-ranking-star"></i></h1>  <span class="me-3" onclick="window.location.reload()">
+      <h1>LE CLASSEMENT </h1>  <span class="me-3" onclick="window.location.reload()">
       <i class="fa-solid fa-rotate-right"></i>
     </span>
     </div>
@@ -12,10 +12,11 @@
     <%# Pour afficher le mot "cloturer le vote, qui va faire apparaitre le bouton choisir" %>
     <% if current_user == @event.user %>
     <div class="d-flex justify-content-center mt-3" style="width:100%">
-      <span class="choose-btn btn-ghost"
+      <%# <span class="choose-btn btn-ghost"
             data-action="click->toggle-elements#toggle">
           Clôture le vote
-      </span>
+      </span> %>
+      <%= link_to "Clôture le vote", event_choose_bar_path(@event), class:"choose-btn btn-ghost"%>
     </div>
     <% end %>
       <div class="row justify-content-center p-3">

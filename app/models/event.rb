@@ -25,7 +25,7 @@ class Event < ApplicationRecord
   def most_voted_bars
     bars.group_by do |bar|
       bar.votes.count
-    end.first.last
+    end.to_a.sort_by(&:first).last.last
   end
 
 end

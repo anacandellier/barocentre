@@ -1,12 +1,17 @@
-<div class="card-product justify-content-between m-2" style="width: 600px ;border-radius: 5px; padding: 0" data-id="<%= bar.id %>">
-  <div class="d-flex align-items-center" style="height:100%">
+<div class="card-product justify-content-between m-2 position-relative <%= 'card-bar-voted' if bar.most_voted? %>" style="width: 600px ;border-radius: 5px; padding: 0"
+    data-id="<%= bar.id %>"
+    data-event-subscription-target="barCard">
+  <div class="d-flex align-items-center flex-grow-1" style="height:100%">
   <img src="<%= bar.photo %>" class="bar-img me-2"/>
-    <div class="card-product-infos d-flex justify-content-between">
-      <div>
-        <h2><%= bar.name %></h2>
+    <div class="card-product-infos d-flex justify-content-between flex-grow-1">
+      <div class="w-100">
+        <div class="d-flex justify-content-between">
+          <h2><%= bar.name %></h2>
+          <i class="fa-solid fa-trophy trophy ms-auto"></i>
+        </div>
         <p><%= bar.address %></p>
 
-      <div class="d-flex flex-row align-items-center">
+        <div class="d-flex flex-row align-items-center">
           <div>
           <% if bar.votes.count <= 5 %>
             <% bar.votes.each do |vote|  %>
