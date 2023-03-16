@@ -22,5 +22,4 @@ class EventUser < ApplicationRecord
   def lon_lat_changed?
     longitude_changed? && latitude_changed?
   end
-
 end

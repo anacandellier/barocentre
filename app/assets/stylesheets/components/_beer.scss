@@ -41,7 +41,7 @@ $size-anim: 120px;
     width: $size-anim * 2;
     &:active {
       &:after {
-        content: 'Barocentre!';
+        content: '';
       }
     }
   }
