@@ -119,3 +119,34 @@ EventUser.create!(
   event: Event.find_by(name: "Afterwork du Wagon"),
   user: laura
 )
+
+
+lol = Event.create!(user: User.find_by(email: "laura@barocentre.com"), name: "Anniv de Lauracaca", date: DateTime.now + 2.hours)
+
+
+eventuser_data = [
+  {
+    user_address: "9 Rue René Boulanger, 75010 Paris, France",
+    transport: "bicycling"
+  },
+  {
+    user_address: "68 Avenue Parmentier, 75011 Paris, France",
+    transport: "bicycling"
+  },
+  {
+    user_address: "104 Avenue Daumesnil, 75012 Paris, France",
+    transport: "transit"
+  },
+  {
+    user_address: "14 Rue Lécuyer, 75018 Paris, France",
+    transport: "bicycling"
+  },
+  {
+    user_address: "26 Rue De La Montagne Sainte-Geneviève, 75005 Paris, France",
+    transport: "bicycling"
+  }
+]
+
+eventuser_data.each_with_index do |data, i|
+  EventUser.create!(data.merge({ user: User.all[i + 1], event: lol }))
+end

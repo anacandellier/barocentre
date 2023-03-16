@@ -28,7 +28,7 @@
 }
 
 .category-selector:checked + label {
-  color: #F4F4F4 !important;
+  color: $darkblue !important;
 }
 
 
@@ -41,7 +41,7 @@
 }
 
 #event_user_transport_driving:checked + label {
-  background-color: #003566;
+  background-color: $orange;
   color: #F4F4F4;
 }
 
@@ -55,7 +55,7 @@
 }
 
 #event_user_transport_bicycling:checked + label {
-  background-color: #003566;
+  background-color: $orange;
   color: #F4F4F4;
 }
 
@@ -69,6 +69,6 @@
 }
 
 #event_user_transport_transit:checked + label {
-  background-color: #003566;
+  background-color: $orange;
   color: #F4F4F4;
 }
