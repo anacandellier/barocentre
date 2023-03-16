@@ -4,6 +4,6 @@
   data-map-barmarker-value="<%= @barycenter_marker.to_json%>"
   data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
 </div>
-<%= link_to bars_path, class: "btn btn-ghost", style: "border: 1px solid black; color: black; border-radius: 20Px; position : fixed; bottom : 30px; left: 90px" do %>
-  LISTE DES BARS <i class="fa-solid fa-beer-mug-empty"></i>
+<%= link_to bars_path, class: "btn btn-ghost", style: "border: 1px solid black; color: white; border-radius: 20Px; position : fixed; bottom : 30px; left: 50%; transform: translateX(-50%);" do %>
+  LISTE DES BARS</i>
 <% end %>
