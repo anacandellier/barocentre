@@ -44,12 +44,21 @@ class EventsController < ApplicationController
   def itineraire
     @event = Event.find(params[:event_id])
     @bar = @event.selected_bar
-    redirect_to :back, notice: "Il y a eu une erreur, veuillez recommencer" if @bar.nil?
-    @markers = [{
+    @eventusers = @event.event_users
+    @markers = @eventusers.geocoded.map do |eventuser|
+      {
+        lat: eventuser.latitude,
+        lng: eventuser.longitude,
+        marker_html: render_to_string(partial: "event_users/marker", locals: {event_user: eventuser} )
+      }
+    end
+    @finalbarmarker = [{
       lat: @bar.latitude,
       lng: @bar.longitude,
-      marker_html: render_to_string(partial: "marker")
+      marker_html: render_to_string(partial: "events/marker")
     }]
+    
+    redirect_to :back, notice: "Il y a eu une erreur, veuillez recommencer" if @bar.nil?
     @event_user = EventUser.where(user: current_user, event: @event).first
   end
 

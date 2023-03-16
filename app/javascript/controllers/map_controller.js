@@ -6,6 +6,7 @@ export default class extends Controller {
     apiKey: String,
     markers: Array,
     barmarker: Array,
+    finalbarmarker: Array
   }
 
 
@@ -42,6 +43,17 @@ export default class extends Controller {
         .setLngLat([ marker.lng, marker.lat ])
         .addTo(this.map)
     })
+
+    this.finalbarmarkerValue.forEach((marker) => {
+
+      const customMarker = document.createElement("div")
+      customMarker.innerHTML = marker.marker_html
+      
+      new mapboxgl.Marker(customMarker)
+        .setLngLat([ marker.lng, marker.lat ])
+        .addTo(this.map)
+    })
+
 
   }
     #fitMapToMarkers() {
