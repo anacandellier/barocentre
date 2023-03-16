@@ -13,4 +13,4 @@
     </div>
   </div>
 </div>
-      <%= link_to 'Ouvrir Gmaps', "https://www.google.com/maps/dir/?api=1&origin=#{CGI.escape(@event_user.user_address)}&destination=barocentre&destination_place_id=#{@bar.placeid}&travelmode=#{@event_user.transport}", class: 'btn btn-ghost', target: '_blank', style: "position : fixed; bottom : 30px; right: 20px" %>
+      <%= link_to 'Itinéraire', "https://www.google.com/maps/dir/?api=1&origin=#{CGI.escape(@event_user.user_address)}&destination=barocentre&destination_place_id=#{@bar.placeid}&travelmode=#{@event_user.transport}", class: 'btn btn-ghost', target: '_blank', style: "position : fixed; bottom : 30px; right: 20px" %>

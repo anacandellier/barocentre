@@ -22,3 +22,7 @@
     display: flex;
   }
 }
+
+.animate-smooth {
+  animation: all ease-in-out 3s forwards;
+}

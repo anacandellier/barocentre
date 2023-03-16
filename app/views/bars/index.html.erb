@@ -10,7 +10,9 @@
        <p class="border-bottom border-secondary">Bars</p>
       <div class="row justify-content-center p-2">
         <% @bars.each do |bar| %>
-          <div class="col-sm-12 col-lg-3 card-trip m-3" style="width: 400px; border-radius: 5px; padding: 0">
+
+          <div class="col-sm-12 col-lg-3 card-trip m-3"
+               style="width: 400px; border-radius: 5px; padding: 0">
             <%= image_tag bar.photo %>
             <div class="card-trip-infos">
               <div>
@@ -21,6 +23,7 @@
               <%= link_to "VOTE", event_votes_path(@event, bar: bar), data: { turbo_method: :post }, class: "btn btn-ghost btn-sm" %>
             </div>
           </div>
+
         <% end %>
       </div>
     </div>

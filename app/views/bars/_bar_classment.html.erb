@@ -1,0 +1,52 @@
+<div class="card-product justify-content-between m-2 position-relative <%= 'card-bar-voted' if bar.most_voted? %>" style="width: 600px ;border-radius: 5px; padding: 0"
+    data-id="<%= bar.id %>"
+    data-event-subscription-target="barCard">
+  <div class="d-flex align-items-center flex-grow-1" style="height:100%">
+  <img src="<%= bar.photo %>" class="bar-img me-2"/>
+    <div class="card-product-infos d-flex justify-content-between flex-grow-1">
+      <div class="w-100">
+        <div class="d-flex justify-content-between">
+          <h2><%= bar.name %></h2>
+          <i class="fa-solid fa-trophy trophy ms-auto"></i>
+        </div>
+        <p><%= bar.address %></p>
+
+        <div class="d-flex flex-row align-items-center">
+          <div>
+          <% if !bar.votes.empty? %>
+            <ul class="crop-avatar">
+            <% bar.votes.first(4).each do |vote| %>
+              <% if vote %>
+                <li>
+                  <%= cl_image_tag(vote&.user&.photo&.key,class: "miniavatar",
+                  :transformation=>[
+                  {:gravity=>"face", :height=>50, :crop=>"fill"},
+                  {:fetch_format=>"auto"}]) %>
+                </li>
+              <% end %>
+            <% end %>
+              <% if bar.votes.count > 4 %>
+                <li>
+                  <p> +<%= bar.votes.count - 4 %></p>
+                </li>
+              <% end %>
+            </ul>
+          <% end %>
+          </div>
+          <div class="me-2">
+            <% if bar.votes.count <= 1 %>
+              <p class="ms-1">(<%= bar.votes.count %> vote)</p>
+            <% else %>
+              <p class="ms-1">(<%= bar.votes.count %> votes)</p>
+            <% end %>
+          </div>
+        </div>
+        <p><%= bar.rating %> <i class="fa-solid fa-star"></i></p>
+      </div>
+    </div>
+    </div>
+    <%= link_to "Choisir",
+    event_choose_bar_path(event, bar: bar),
+    data: { toggle_elements_target: "element" },
+    class: "btn btn-sm validate-bar-btn "%>
+</div>
