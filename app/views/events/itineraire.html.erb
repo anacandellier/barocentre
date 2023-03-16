@@ -1,6 +1,7 @@
 <div class="baro-map"
   data-controller="map"
   data-map-markers-value="<%= @markers.to_json %>"
+  data-map-finalbarmarker-value="<%= @finalbarmarker.to_json %>"
   data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
 </div>
 <div class="card-product" style="width: 300px; border-radius: 5px; padding: 0; position : fixed; bottom : 50px; right: 35px">
