@@ -3,27 +3,29 @@
   <div class="justify-content-center">
     <div class="col-sm-3 col-lg-12 ps-5 pe-5 pt-3 pb-2">
       <div class="text-center border-bottom border-secondary mt-2">
-        <h1><%= @event.name.capitalize %></h1>
-        <p class="border-bottom border-secondary pb-2">
-          <i class="fa-solid fa-crown"></i> <strong><%= @event.user.username %></strong>
-        </p>
-
-        <div class="d-flex justify-content-center mb-3 btn-wrapper">
-          <% if current_user == @event.user %>
-            <%= link_to "Bar O centre", create_bars_path(@event), class: "btn btn-bar", data: { turbo_method: :post } %>
-          <% end %>
-        </div>
-        <div class="d-flex justify-content-center mb-3 btn-wrapper">
-          <span class="me-3" onclick="window.location.reload()">
-            <i class="fa-solid fa-rotate-right"></i>
-          </span>
+        <div class="d-flex justify-content-center">
+          <h1><%= @event.name.capitalize %></h1>
           <span class="btn-minishare ms-3" data-controller="share"
                 data-action="click->share#share"
                 data-share-title-value="<%= @event.name %>"
                 data-share-url-value="<%= new_event_event_user_url(@event) %>">
-                <i class="fa-solid fa-share-from-square text-black"></i>
+                <i class="fa-solid fa-share-from-square"></i>
           </span>
         </div>
+          <p class="pb-2">
+            <i class="fa-solid fa-crown"></i> <strong><%= @event.user.username %></strong>
+          </p>
+
+        <div class="d-flex justify-content-center mb-3 btn-wrapper">
+          <% if current_user == @event.user %>
+            <%= link_to create_bars_path(@event), class: "btn btn-bar", data: { turbo_method: :post} do %>
+              <div class="d-flex justify-content-center align-items-center">
+                <i class="fa-solid fa-dice"></i>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+        <p text-left>Participants</p>
       </div>
       <div class="row d-flex justify-content-center pt-2">
         <% @eventusers.each do |element| %>
