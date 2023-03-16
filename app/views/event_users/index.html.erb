@@ -17,15 +17,20 @@
             <i class="fa-solid fa-crown"></i> <strong><%= @event.user.username %></strong>
           </p>
 
-        <div class="d-flex justify-content-center mb-3 btn-wrapper">
+        <div class="d-flex justify-content-center mb-3 btn-wrapper" data-controller="sweatalert">
+          <div class="btn btn-bar" data-action="click->sweatalert#fire" data-sweatalert-target="doubled">
+            <div class="d-flex justify-content-center align-items-center" >
+              <i class="fa-solid fa-dice"></i>
+            </div>
+          </div>
           <% if current_user == @event.user %>
-            <%= link_to create_bars_path(@event), class: "btn btn-bar", data: { turbo_method: :post} do %>
-              <div class="d-flex justify-content-center align-items-center">
-                <i class="fa-solid fa-dice"></i>
-              </div>
-            <% end %>
+            <%= link_to "lol", create_bars_path(@event), class: "d-none", data: { turbo_method: :post, sweatalert_target: "link"} %>
           <% end %>
+          <div class="d-none" data-sweatalert-target="loader">
+            <%= render "shared/loader" %>
+          </div>
         </div>
+
         <p text-left>Participants</p>
       </div>
       <div class="row d-flex justify-content-center pt-2 <%= "owner" if @event.user == current_user %>" data-event-subscription-target="users">
@@ -35,7 +40,7 @@
       </div>
     </div>
   </div>
-  <div class="col-sm-3 col-lg-12 d-flex justify-content-center">
+  <div class="col-sm-3 col-lg-12 d-flex justify-content-center" >
     <%= link_to map_event_users_path, class: "btn btn-ghost", style: "border: 1px solid black; border-radius: 20Px; position : fixed; bottom : 50px;" do %>
       CARTE <i class="fa-solid fa-map"></i>
     <% end %>
