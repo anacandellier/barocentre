@@ -2,3 +2,13 @@
   --animate-duration: 2s;
   --animate-delay: 10s;
 }
+
+.fa-dice::before {
+  color: $darkblue;
+}
+
+.btn-minishare {
+  position: absolute;
+  bottom: 478px;
+  right: 46px;
+}

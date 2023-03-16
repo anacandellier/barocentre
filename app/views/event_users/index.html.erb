@@ -30,8 +30,8 @@
           </div>
         </div>
       </div>
-       <p class="border-bottom border-top border-secondary text-center pb-3 pt-3" style="font-size: 20px">Participants</p>
-        <p class="text-center"><i class="fa-solid fa-crown"></i> <strong>Organisé par : <%= @event.user.username %></strong></p>
+        <p class="text-center"><i class="fa-solid fa-crown"></i> <strong><%= @event.user.username %></strong></p>
+       <p class="border-bottom border-secondary text-start pb-1 pt-3" style="font-size: 16px">Participants</p>
       <div class="row d-flex justify-content-center pt-2 <%= "owner" if @event.user == current_user %>" data-event-subscription-target="users">
         <% @eventusers.each do |element| %>
           <%= render "event_users/event_user", element: element%>
