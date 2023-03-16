@@ -12,3 +12,13 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+.trashcan {
+  display: none;
+}
+
+.owner {
+  .trashcan {
+    display: flex;
+  }
+}
