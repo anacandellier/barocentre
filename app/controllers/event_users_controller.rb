@@ -27,7 +27,7 @@ class EventUsersController < ApplicationController
     @event_user.user = current_user
     @event_user.event = @event
     if @event_user.save!
-      EventChannel.broadcast_to(@event, render_to_string(partial: "event_user", locals: { element: @event_user }))
+      EventChannel.broadcast_to(@event, {event_user: render_to_string(partial: "event_user", locals: { element: @event_user })})
       redirect_to event_event_users_path(@event)
     else
       render :new, status: :unprocessable_entity

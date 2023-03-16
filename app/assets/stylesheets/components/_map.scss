@@ -10,6 +10,6 @@
 
 .baro-map {
   width: 100%;
-  height: $container-height;
+  height: calc(100vh - #{$navbar-height});
   border-radius: 15px
 }
