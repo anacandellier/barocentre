@@ -4,10 +4,15 @@
     <%= link_to root_path, class: "navbar-brand" do %>
       <%= image_tag "barocentre_biere.png", class: "navbar-logo"%>
     <% end %>
-
+    <% if action_name == "home" %>
+      <p style="color: white; font-family: 'Montserrat'; letter-spacing: 3px; font-size: 20px; position: relative; top: 9px;">
+        BAROCENTRE
+      </p>
+    <% end %>
     <button class="navbar-toggler" style="border: 0px" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
